@@ -22,43 +22,39 @@ public class Puzzle {
    private String estado_anterior;
    private String estado_siguiente;
    private Boolean visitado;
-   String val;
+   String mov;
    
    public String retonar_estados(String puzzle){
        
+      
+       int n = (int) Math.floor( Math.random()*(0-4)+5 );
        
         int indice = puzzle.indexOf("0");
         
-        //mov izquierda  450267
-        if( indice != 0 && indice != 3 && indice != 6  ){
-             val = puzzle.substring(0, indice - 1) + "0" + puzzle.charAt(indice-1) + puzzle.substring(indice+1);
-            if ( esta_en_lista(val) ) {
-                if( indice != 2 && indice != 5 && indice != 8){
-                     val = puzzle.substring(0, indice) + puzzle.charAt(indice + 1) + "0"+ puzzle.substring(indice + 2);
-                     if ( esta_en_lista(val) ) {
-                         val = puzzle.substring(0, indice) + puzzle.charAt(indice + 1) + "0"+ puzzle.substring(indice + 2);
-                            if ( esta_en_lista(val) ) {
-                                if( indice > 2){
-                                    val = puzzle.substring(0, indice - 3) + "0" + puzzle.substring( indice - 2 ,indice ) + puzzle.charAt(indice -3)+puzzle.substring(indice+1);
-                                     if( indice < 6) {
-                                         val = puzzle.substring(0, indice)+ puzzle.charAt(indice+3)+ puzzle.substring(indice+1, indice+3)+ puzzle.charAt(indice);
-                                     }
-                                }
-                            }else{
-                                return val;
-                            }
-                         
-                     }else{
-                         return val;
-                     }
-                }
-            }else{
-                return val;
+        switch(n){
+            case 1 : if( indice != 0 && indice != 3 && indice != 6  ){
+                        return mov = puzzle.substring(0, indice - 1) + "0" + puzzle.charAt(indice-1) + puzzle.substring(indice+1);
+                       }else{
+                                
+                        }
+                       break; 
+        
+            case 2 :  if( indice != 2 && indice != 5 && indice != 8){
+                          return  mov = puzzle.substring(0, indice) + puzzle.charAt(indice + 1) + "0"+ puzzle.substring(indice + 2);
+                       }break; 
+            case 3 :  if( indice > 2 ){           
+                          return  mov = puzzle.substring(0, indice) + puzzle.charAt(indice + 1) + "0"+ puzzle.substring(indice + 2);
+                       }break; 
+                
+                
+            case 4 : if( indice < 6) {
+                       return mov = puzzle.substring(0, indice)+ puzzle.charAt(indice+3)+ puzzle.substring(indice+1, indice+3)+ puzzle.charAt(indice);
+                      }break; 
             }
-
-        }
-        return val;
-    }
+        
+        
+        return puzzle;
+   }
     
     public Boolean esta_en_lista(String estado){
         Boolean visitado = false;

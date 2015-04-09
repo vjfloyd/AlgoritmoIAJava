@@ -70,7 +70,20 @@ public class Pruebas {
             
             boolean visitado = true;
              System.out.println(!visitado);
+             
+             //Numeros Ramdom
+               int n1 = (int) Math.floor( Math.random()*(0-4)+5 );
+                       
+               int n2 = (int) Math.floor( Math.random()*(0-4)+5 );
+               int n3 = (int) Math.floor( Math.random()*(0-4)+5 );
+               int n4 = (int) Math.floor( Math.random()*(0-4)+5 );
+                
                     
+                System.out.println( n1 );
+                System.out.println( n2 );
+                System.out.println( n3 );
+                System.out.println( n4 );
+            }
     }
     
-}
+
