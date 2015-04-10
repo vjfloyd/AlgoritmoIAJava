@@ -15,7 +15,8 @@ import java.util.List;
  */
 public class Puzzle {
 
-    ArrayList<String> lista = new ArrayList<String>();
+   ArrayList<String> lista = new ArrayList<String>();
+   ArrayList<Integer> movDirec = new ArrayList<>();
    private String estado_inicial;// = "201475863";
    private String estado_final;// = "123456780";
    private String estado_actual;
@@ -23,39 +24,69 @@ public class Puzzle {
    private String estado_siguiente;
    private Boolean visitado;
    String mov;
+   private Integer direc_mov;
    
    public String retonar_estados(String puzzle){
-       
       
-       int n = (int) Math.floor( Math.random()*(0-4)+5 );
+       int indice = puzzle.indexOf("0");
        
-        int indice = puzzle.indexOf("0");
-        
-        switch(n){
-            case 1 : if( indice != 0 && indice != 3 && indice != 6  ){
+       if( indice != 0 && indice != 3 && indice != 6  ){// IZQ
                         return mov = puzzle.substring(0, indice - 1) + "0" + puzzle.charAt(indice-1) + puzzle.substring(indice+1);
-                       }else{
-                                
-                        }
-                       break; 
-        
-            case 2 :  if( indice != 2 && indice != 5 && indice != 8){
+       }else if( indice < 6) { //ABAJO
+                       return mov = puzzle.substring(0, indice)+ puzzle.charAt(indice+3)+ puzzle.substring(indice+1, indice+3)+ puzzle.charAt(indice) + puzzle.substring(indice+4);
+                      
+       }else if( indice != 2 && indice != 5 && indice != 8){ // DER
                           return  mov = puzzle.substring(0, indice) + puzzle.charAt(indice + 1) + "0"+ puzzle.substring(indice + 2);
-                       }break; 
-            case 3 :  if( indice > 2 ){           
-                          return  mov = puzzle.substring(0, indice) + puzzle.charAt(indice + 1) + "0"+ puzzle.substring(indice + 2);
-                       }break; 
-                
-                
-            case 4 : if( indice < 6) {
-                       return mov = puzzle.substring(0, indice)+ puzzle.charAt(indice+3)+ puzzle.substring(indice+1, indice+3)+ puzzle.charAt(indice);
-                      }break; 
-            }
+          
+       }
+       else if( indice > 2 ){//ARRIB           
+                          return  mov = puzzle.substring(0, indice - 3) + "0" + puzzle.substring( indice - 2 , indice)+ puzzle.charAt(indice -3)+ puzzle.substring(indice+1);
         
-        
-        return puzzle;
+               
+       }
+        return null;
    }
+   
+   
+   public String movIzq(String puzzle){
+       int indice = puzzle.indexOf("0");
+       if( indice != 0 && indice != 3 && indice != 6  ){
+                         direc_mov = 1 ;
+                        return mov = puzzle.substring(0, indice - 1) + "0" + puzzle.charAt(indice-1) + puzzle.substring(indice+1);
+       }
+       return null;
+        }
     
+        public String movArr(String puzzle){
+           int indice = puzzle.indexOf("0");
+           if( indice > 2 ){ 
+                            direc_mov = 1  ;  
+                          return  mov = puzzle.substring(0, indice) + puzzle.charAt(indice + 1) + "0"+ puzzle.substring(indice + 2);
+                       }
+           return null;
+       }
+   
+       public String movDer(String puzzle){
+           int indice = puzzle.indexOf("0");
+           if( indice != 2 && indice != 5 && indice != 8){
+                            direc_mov = 1 ;
+                          return  mov = puzzle.substring(0, indice) + puzzle.charAt(indice + 1) + "0"+ puzzle.substring(indice + 2);
+                       }
+           return null;
+       }
+       
+       
+       
+       
+       public String movAb(String puzzle){
+           int indice = puzzle.indexOf("0");
+           if( indice < 6) {
+                            direc_mov = 1 ;
+                       return mov = puzzle.substring(0, indice)+ puzzle.charAt(indice+3)+ puzzle.substring(indice+1, indice+3)+ puzzle.charAt(indice);
+                      }
+           return null;
+       }
+       
     public Boolean esta_en_lista(String estado){
         Boolean visitado = false;
         for (String l : lista) {
@@ -92,10 +123,10 @@ public class Puzzle {
     public static void main(String[] args) {
        
         Puzzle gPuzzle =  new Puzzle();
-        gPuzzle.estado_anterior = "801723654";
+        gPuzzle.estado_anterior = "810723654";
         
         
-        for (int i = 0; i < 4; i++) {
+        for (int i = 0; i < 12; i++) {
              gPuzzle.dfs(gPuzzle);
              gPuzzle.estado_anterior = gPuzzle.estado_actual;
              System.out.println( gPuzzle.lista.get(i));
