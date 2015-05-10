@@ -78,11 +78,18 @@ public class Pruebas {
                int n3 = (int) Math.floor( Math.random()*(0-4)+5 );
                int n4 = (int) Math.floor( Math.random()*(0-4)+5 );
                 
-                    
                 System.out.println( n1 );
                 System.out.println( n2 );
                 System.out.println( n3 );
                 System.out.println( n4 );
+                
+                String puzzle = "015327498";
+                int indice = puzzle.indexOf("0");
+               // String mov = puzzle.substring(0, indice-3) + puzzle.charAt(indice) + puzzle.substring(indice-2, indice)+ puzzle.charAt(indice-3)+ puzzle.substring(indice +1);
+                
+                String mov = puzzle.substring(0, indice )+ puzzle.charAt(indice+3)+ puzzle.substring(indice+1, indice+3)+ puzzle.charAt(indice) + puzzle.substring(indice+4);
+                                            
+                System.out.println(mov);
             }
     }
     
