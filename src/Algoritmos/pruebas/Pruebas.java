@@ -82,14 +82,19 @@ public class Pruebas {
                 System.out.println( n2 );
                 System.out.println( n3 );
                 System.out.println( n4 );
-                
-                String puzzle = "015327498";
-                int indice = puzzle.indexOf("0");
-               // String mov = puzzle.substring(0, indice-3) + puzzle.charAt(indice) + puzzle.substring(indice-2, indice)+ puzzle.charAt(indice-3)+ puzzle.substring(indice +1);
-                
-                String mov = puzzle.substring(0, indice )+ puzzle.charAt(indice+3)+ puzzle.substring(indice+1, indice+3)+ puzzle.charAt(indice) + puzzle.substring(indice+4);
-                                            
-                System.out.println(mov);
+String      x1 = "814720531";
+              String  puzzle = "817230546";
+              
+              
+              int indice = puzzle.indexOf("0");
+              String var = puzzle.substring(0, indice)+ puzzle.charAt(indice+3)+ puzzle.substring(indice+1, indice+3)+ puzzle.charAt(indice) + puzzle.substring(indice+4);
+              System.out.println( var );
+              
+              int indice2 = var.indexOf("0");
+              String var2 =  var.substring(0, indice2 - 3) + "0" + var.substring( indice2 - 2 , indice2)+ var.charAt(indice2 -3)+ var.substring(indice2+1);
+              
+              
+              System.out.println( var2 );
             }
     }
     

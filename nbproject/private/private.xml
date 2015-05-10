@@ -3,7 +3,11 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+<<<<<<< HEAD
             <file>file:/F:/UNIVERSIDAD/2015-1/IA/AlgoritmoIAJava/src/Algoritmos/bfs/Puzzle.java</file>
+=======
+            <file>file:/home/vj/2015%20-%201/IA/AlgoritmoIAJava/src/Algoritmos/dfs/Puzzle.java</file>
+>>>>>>> 28cda9725e52fda9551ab4953a89b0d51166b29c
         </group>
     </open-files>
 </project-private>
