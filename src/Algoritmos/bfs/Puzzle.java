@@ -17,7 +17,7 @@ public class Puzzle {
 
     ArrayList<String> lista = new ArrayList<String>();
    private String estado_inicial;// = "201475863";
-   private String estado_final;// = "123456780";
+   private String estado_final = "123456780";
    private String estado_actual;
    private String estado_anterior;
    private String estado_siguiente;
@@ -91,9 +91,9 @@ public class Puzzle {
        
         Puzzle gPuzzle =  new Puzzle();
         gPuzzle.estado_anterior = "801723654";
+      
         
-        
-        for (int i = 0; i < 10; i++) {
+        for (int i = 0; i < 80; i++) {
              gPuzzle.dfs(gPuzzle);
              gPuzzle.estado_anterior = gPuzzle.estado_actual;
              System.out.println( gPuzzle.lista.get(i));
@@ -101,6 +101,17 @@ public class Puzzle {
         
 //        for (int i = 0; i < gPuzzle.lista.size() ; i++) {
 //           // gPuzzle.imprimir( lista.get(i) );
+//             System.out.println( gPuzzle.lista.get(i));
+//        }
+        
+//        while ( gPuzzle.estado_anterior != gPuzzle.estado_final ) {            
+//              gPuzzle.dfs(gPuzzle);
+//             gPuzzle.estado_anterior = gPuzzle.estado_actual;
+//            
+//        }
+//        
+//         for (int i = 0; i < gPuzzle.lista.size() ; i++) {
+//         // gPuzzle.imprimir( lista.get(i) );
 //             System.out.println( gPuzzle.lista.get(i));
 //        }
     }

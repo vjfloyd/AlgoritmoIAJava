@@ -82,7 +82,7 @@ public class Pruebas {
                 System.out.println( n2 );
                 System.out.println( n3 );
                 System.out.println( n4 );
-String      x1 = "814720531";
+              String      x1 = "814720531";
               String  puzzle = "817230546";
               
               
