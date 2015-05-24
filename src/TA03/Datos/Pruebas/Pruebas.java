@@ -88,7 +88,27 @@ public class Pruebas {
             
         }
      
+        String[][] matriz = new String[2][2];
+        
+        int [][] numeros = {{6,7,5}, {3, 8, 4,10}, {1,0,2}, {9,5,2}};
+        
+        for (int i = 0; i < numeros[1].length ; i++) {
+            System.out.println( numeros[i][1]);
+        }
        
+        String [][] letras = {{"uno","dos" ,"cinco"}, {"tres", "ocho", "cuatro", "diez"}, { "uno", "cero", "dos"}, {"nueve", "cinco", "dos"}};
+        for (int i = 0; i < letras[1].length ; i++) {
+            System.out.println( letras[i][0]);
+        }
+        
+        int[][] test; 
+        test = new int[5][10];
+
+        int row = test.length;
+        int col = test[0].length;
+
+        System.out.println(row);
+        System.out.println(col);
     }
     
     

@@ -28,17 +28,22 @@ private static HashMap<String, String[]> data;
 private static String[] valores; 
 private static String[] variable;
 private static ArrayList<String> lista = new ArrayList<>();
-        
+private static String[][] matriz;
+private static int contFilasDatos = 0;
+private static Boolean pasoData =  false;
+
 public static void leerDatos(){
     String[]  var;
-
     String relacion;
     String atributo;
     int cont = 0;
     int contv = 0;
+    
     atributos = new HashMap<String, String[]>();
     data = new HashMap<String, String[]>();
-
+    variable = new String[5];
+    matriz = new String[20][5];
+    
     try {
         Scanner punteroArchivo = new Scanner( new FileReader( "F:\\UNIVERSIDAD\\2015-1\\IA\\weather.nominal.txt" ) );
         String linea="";
@@ -46,68 +51,83 @@ public static void leerDatos(){
         while( punteroArchivo.hasNextLine() ){
              linea = punteroArchivo.nextLine();
 
-            var = linea.split("@");
+            //var = linea.split("@");
             valores = new String[5];
-
+            //matriz = new String[variable.length][variable.length];
 
             try {
-                if ( var[1].equalsIgnoreCase("data")) {
-                    String[] datos = var[1].split(",");
-                    lista.add(datos[0]);
-                    lista.add(datos[1]);
-                    lista.add(datos[2]);
-                    lista.add(datos[3]);
-                    lista.add(datos[4]);
-                    int data;
-                    
-                    
-//                    data.put(variable[contv] , var);
-//                    contv++;
-//                    
-                }else{
-                        if ( !var[1].contains("relation")) {
-                        String temp = var[1].toString().replace("{", "");
-                        temp = temp.replace("}", "");
-                        temp =  temp.replace(",", "");
+                
+                if ( linea.contains("attribute")) {
+                    String temp = linea.toString().replace("{", "");
+                    temp = temp.replace("@", "");
+                    temp = temp.replace("}", "");
+                    temp =  temp.replace(",", "");
 
-                        String[] tempVariable = temp.split(" ");
-                        System.out.println("###########");
-                        for (int i = 0; i < tempVariable.length ; i++) {
-                            System.out.print(tempVariable[i]+"-");
-                        }
-                        String[] valores = new String[tempVariable.length-2];
-                        System.out.println("###########");
-                        for (int i = 0; i < tempVariable.length-2 ; i++) {
-                            valores[i] = tempVariable[i+2]; 
-                            System.out.println("var = "+valores[i]);
+                    String[] tempVariable = temp.split(" ");
+                    System.out.println("###########");
+                    for (int i = 0; i < tempVariable.length ; i++) {
+                        System.out.print(tempVariable[i]+"-");
+                    }
+                    String[] valores = new String[tempVariable.length-2];
+                    System.out.println("###########");
+                    for (int i = 0; i < tempVariable.length-2 ; i++) {
+                        valores[i] = tempVariable[i+2]; 
+                        System.out.println("var = "+valores[i]);
 
-                        }
-                          atributos.put( tempVariable[1] , valores );
-                          variable[cont] = tempVariable[1]; 
-                          cont++;
-                        }
+                    }
+                   
+                    atributos.put( tempVariable[1] , valores );
+                    variable[cont] = tempVariable[1]; 
+                   // if (cont < 5) {
+                        System.out.println("VARIABLE " + variable[cont]);
+                        System.out.println(cont);
+                   // }
+                    cont++;
+                } 
+                if (pasoData) {
+                   
+                   String[] datos = linea.split(",");
+                  // System.out.println("########### DATA #########");
+                   
+                    for (int j = 0; j < variable.length ; j++) {
+                        matriz[contFilasDatos][j] = datos[j]; 
+                       System.out.print(" " +matriz[contFilasDatos][j]+" ");
+                    }
+                    contFilasDatos++;
+                    System.out.println();
                 }
-            } catch (Exception e) {
+                
+                ///System.out.println("########### FIN DATA #########");
+                
+                if (linea.contains("@data")) {
+                    pasoData = true;
+                }
+      
+             } catch (Exception e) {
             }
-
+ 
         }
 
     } catch (FileNotFoundException ex) {
         Logger.getLogger(TA03.class.getName()).log(Level.SEVERE, null, ex);
     }
-   for (Map.Entry<String, String[]> entrySet : atributos.entrySet()) {
-        String key = entrySet.getKey();
-        System.out.println("KEY : "+ key);
-        String[] value = entrySet.getValue();
-        for (String v : value) {
-            System.out.print("Variables : " +v+",");
-        }
-        System.out.println();
-    }
-
     System.out.println("************************************************");
 }
 
+public static void calcularMarginal( String[][] matriz ){
+    
+    for (int m = 0; m < variable.length ; m++) {
+        for (int i = 0; i < variable.length ; i++) {
+            for (int j = 0; j < matriz.length; j++) {
+                if ( variable[m].equalsIgnoreCase( matriz[j][i] ) ) {
+                    
+                }
+            }
+        }
+    }
+   
+    
+}
 
 public static void main(String[] args) {
 
@@ -124,6 +144,21 @@ public static void main(String[] args) {
         System.out.println();
     }
     
+    System.out.println("contFilasDatos" + contFilasDatos);
+    System.out.println("variable" + variable.length);
+    System.out.println("********* MATRIZ DE DATOS ****************");
+    for (int i = 0; i < contFilasDatos ; i++) {
+        for (int j = 0; j < variable.length ; j++) {
+            System.out.print(matriz[i][j] + "-" );
+        }
+        System.out.println();
+    }
+   // System.out.println( atributos. );
+    
+    System.out.println("*********VARIABLE****************");
+    for (int i = 0; i < variable.length ; i++) {
+        System.out.println(variable[i]);
+    }
    // System.out.println("###" :  atributos.g );
 }
 
