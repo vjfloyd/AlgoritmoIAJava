@@ -3,11 +3,22 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+<<<<<<< HEAD
             <file>file:/F:/UNIVERSIDAD/2015-1/IA/AlgoritmoIAJava/src/TA03/Variable.java</file>
             <file>file:/F:/UNIVERSIDAD/2015-1/IA/AlgoritmoIAJava/src/TA03/TA03.java</file>
             <file>file:/F:/UNIVERSIDAD/2015-1/IA/AlgoritmoIAJava/src/TA03/Datos/Indicaciones.txt</file>
             <file>file:/F:/UNIVERSIDAD/2015-1/IA/AlgoritmoIAJava/src/TA03/Datos/weather.nominal.txt</file>
             <file>file:/F:/UNIVERSIDAD/2015-1/IA/AlgoritmoIAJava/src/TA03/Datos/Pruebas/Pruebas.java</file>
+=======
+            <file>file:/Users/vjrojasb/2015-1/IA/cods/AlgoritmoIAJava/src/TA03/Valor.java</file>
+            <file>file:/Users/vjrojasb/2015-1/IA/cods/AlgoritmoIAJava/src/TA03/Relacion.java</file>
+            <file>file:/Users/vjrojasb/2015-1/IA/cods/AlgoritmoIAJava/src/TA03/Variable.java</file>
+            <file>file:/Users/vjrojasb/2015-1/IA/cods/AlgoritmoIAJava/src/TA03/Logica.java</file>
+            <file>file:/Users/vjrojasb/2015-1/IA/cods/AlgoritmoIAJava/src/TA03/Datos/Hipica.txt</file>
+            <file>file:/Users/vjrojasb/2015-1/IA/cods/AlgoritmoIAJava/src/TA03/Datos/weather.nominal.txt</file>
+            <file>file:/Users/vjrojasb/2015-1/IA/cods/AlgoritmoIAJava/src/TA03/Datos/Indicaciones.txt</file>
+            <file>file:/Users/vjrojasb/2015-1/IA/cods/AlgoritmoIAJava/src/TA03/TA03.java</file>
+>>>>>>> de35ac0041d1f20a239f9e865aa79ac038c2b7c1
         </group>
     </open-files>
 </project-private>

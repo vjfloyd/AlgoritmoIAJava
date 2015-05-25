@@ -19,7 +19,7 @@ import java.util.logging.Logger;
  *
  * @author Vj
  */
-public class TA03 {
+public class Logica {
  
     /**
      * @param args the command line arguments
@@ -43,6 +43,9 @@ public void leerDatos(){
     data = new HashMap<String, String[]>();
     variable = new String[5];
     matriz = new String[20][5];
+    Variable variables = new Variable();
+                     
+   
     
     try {
         //Scanner punteroArchivo = new Scanner( new FileReader( "F:\\UNIVERSIDAD\\2015-1\\IA\\weather.nominal.txt" ) );
@@ -52,10 +55,7 @@ public void leerDatos(){
         while( punteroArchivo.hasNextLine() ){
              linea = punteroArchivo.nextLine();
 
-            //var = linea.split("@");
-            valores = new String[5];
-            //matriz = new String[variable.length][variable.length];
-
+           
             try {
                 
                 if ( linea.contains("attribute")) {
@@ -65,16 +65,16 @@ public void leerDatos(){
                     temp =  temp.replace(",", "");
 
                     String[] tempVariable = temp.split(" ");
-                    System.out.println("###########");
-                    for (int i = 0; i < tempVariable.length ; i++) {
-                        System.out.print(tempVariable[i]+"-");
-                    }
-                    String[] valores = new String[tempVariable.length-2];
-                    System.out.println("###########");
+                    String[] valores = new String[tempVariable.length-2]; 
+                            
+                             
                     for (int i = 0; i < tempVariable.length-2 ; i++) {
+                        Valor valor = new Valor();
+                        valor.setNombre(tempVariable[i+2]);
+                        variables.agregarValor(valor);
                         valores[i] = tempVariable[i+2]; 
                         System.out.println("var = "+valores[i]);
-
+                        System.out.println("var = "+ variables.getValor(i).getNombre());    
                     }
                    
                     atributos.put( tempVariable[1] , valores );
@@ -132,7 +132,7 @@ public static void calcularMarginal( String[][] matriz ){
 
 public static void main(String[] args) {
 
-    TA03 obj =  new TA03();
+    Logica obj =  new Logica();
     obj.leerDatos();
    
 
