@@ -1,17 +1,18 @@
 
 **  Leer un conjunto de datos de acuerdo al formato proporcionado con el enunciado de la TA3. En el TA3
-    se anexan 02 conjuntos de datos: soybean.txt y weather.nominal.txt. Su programa debe ser capaz de leer
-    archivos con ese formato. @relation es el nombre del conjunto de datos. @attribute describe el nombre
-    de la variable aleatoria y entre llaves vienen enumerados todos sus posibles valores. @data indica que a
-    continuacion vienen los datos. Se recomienda abrir esos archivos con Notepad++ para su visualizacion.
+    se anexan 02 conjuntos de datos: soybean.txt y weather.nominal.txt. 
+**  Su programa debe ser capaz de leer archivos con ese formato. @relation es el nombre del conjunto de datos.
+    @attribute describe el nombre de la variable aleatoria y entre llaves vienen enumerados todos sus posibles 
+    valores. @data indica que a continuacion vienen los datos. Se recomienda abrir esos archivos con Notepad++ 
+    para su visualizacion.
 
-**  Calcular la probabilidad condicional P (A j B), donde A y B son dos variables cualquiera del conjunto de
+**  Calcular la probabilidad condicional P (A/B), donde A y B son dos variables cualquiera del conjunto de
     datos. Esto lo debe ingresar el usuario.
 
 **  Calcular la distribucion marginal de cada variable P (A) a partir del conjunto de datos.
 
-**  Debe permitir ingresar una (01) relacion A ! B, donde A y B son dos variables cualquiera mientras que
+**  Debe permitir ingresar una (01) relacion A -> B, donde A y B son dos variables cualquiera mientras que
     el resto de variables permanecen independientes. Esto lo debe ingresar el usuario.
 
 **  Debe calcular la distribucion conjunta con todas las variables independientes y debe calcular la distribucion
-    conjunta con 01 relacion A ! B mientras que el resto de variables permanecen independientes.
+    conjunta con 01 relacion A -> B mientras que el resto de variables permanecen independientes.
