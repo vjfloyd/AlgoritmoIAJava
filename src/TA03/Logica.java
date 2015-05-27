@@ -150,6 +150,62 @@ public static double calcularMarginal( String va, String valor){
     return res;
 }
 
+public static double calculaProbCondicional(String varA, String valorA, String varB, String valorB){
+    
+    int[] coincidencias = new int[14];
+    int cont = 0;        
+    
+    
+    for (Map.Entry<String, String[]> entrySet : data.entrySet()) {
+        String key = entrySet.getKey();
+         if (key.equals(varB)) {
+             String[] value = entrySet.getValue();
+             for (int i = 0; i < value.length ; i++) {
+                   if ( valorB.equalsIgnoreCase( value[i] )) {
+                       coincidencias[cont] = i;
+                       cont++;
+                 }
+             }
+        }
+    }
+    cont = 0;
+    for (Map.Entry<String, String[]> entrySet : data.entrySet()) {
+        String key = entrySet.getKey();
+         if (key.equals(varA)) {
+             String[] value = entrySet.getValue();
+             for (int i = 0; i < coincidencias.length ; i++) {
+                   if ( valorB.equalsIgnoreCase( value[coincidencias[i]] )) {
+                       coincidencias[cont] = i;
+                       cont++;
+                 }
+             }
+        }
+    }
+    
+    double  numerador = cont/14;
+  
+      cont = 0;      
+      for (Map.Entry<String, String[]> entrySet : data.entrySet()) {
+        String key = entrySet.getKey();
+         if (key.equals(varA)) {
+             String[] value = entrySet.getValue();
+             for (String v : value) {
+                  if (v.equals(valorA)) {
+                     cont++;
+                 }
+             }
+        }
+
+    }
+      double denominador = cont/14;
+      
+     return numerador/denominador;
+      
+ 
+}
+
+
+
 public static void main(String[] args) {
 
     Logica obj =  new Logica();
@@ -202,7 +258,10 @@ public static void main(String[] args) {
         System.out.println(variable[i]);
     }
    // System.out.println("###" :  atributos.g );
-}
+    
+    System.out.println("*********PROBABILIDAD CONDICIONAL****************");
+    System.out.println(calculaProbCondicional("windy","true","play","yes"));
 
-
+    
+    }
 }
