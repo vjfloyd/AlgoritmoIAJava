@@ -11,7 +11,8 @@ package TA03;
  * @author vjrojasb
  */
 public class Relacion {
-    private Variable variable;
+    private Variable vaA;
+    private Variable vaB;
     
     
 }

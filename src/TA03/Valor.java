@@ -21,6 +21,4 @@ public class Valor {
         this.nombre = nombre;
     }
 
-    
-    
 }

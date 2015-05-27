@@ -43,13 +43,13 @@ public void leerDatos(){
     data = new HashMap<String, String[]>();
     variable = new String[5];
     matriz = new String[20][5];
-    Variable variables = new Variable();
-                     
+   
+    
    
     
     try {
-        //Scanner punteroArchivo = new Scanner( new FileReader( "F:\\UNIVERSIDAD\\2015-1\\IA\\weather.nominal.txt" ) );
-        Scanner punteroArchivo = new Scanner( new FileReader( "/Users/vjrojasb/2015-1/IA/weather.nominal.txt" ) );
+        Scanner punteroArchivo = new Scanner( new FileReader( "F:\\UNIVERSIDAD\\2015-1\\IA\\weather.nominal.txt" ) );
+       // Scanner punteroArchivo = new Scanner( new FileReader( "/Users/vjrojasb/2015-1/IA/weather.nominal.txt" ) );
         String linea=""; 
 
         while( punteroArchivo.hasNextLine() ){
@@ -66,15 +66,16 @@ public void leerDatos(){
 
                     String[] tempVariable = temp.split(" ");
                     String[] valores = new String[tempVariable.length-2]; 
-                            
+                     Variable objVariable = new Variable();        
                              
                     for (int i = 0; i < tempVariable.length-2 ; i++) {
                         Valor valor = new Valor();
                         valor.setNombre(tempVariable[i+2]);
-                        variables.agregarValor(valor);
+                        objVariable.agregarValor(valor);
+                       
                         valores[i] = tempVariable[i+2]; 
                         System.out.println("var = "+valores[i]);
-                        System.out.println("var = "+ variables.getValor(i).getNombre());    
+                        System.out.println("OBJvar = "+ objVariable.getValor(i).getNombre());    
                     }
                    
                     atributos.put( tempVariable[1] , valores );
@@ -120,7 +121,7 @@ public static void calcularMarginal( String[][] matriz ){
     for (int m = 0; m < variable.length ; m++) {
         for (int i = 0; i < variable.length ; i++) {
             for (int j = 0; j < matriz.length; j++) {
-                if ( variable[m].equalsIgnoreCase( matriz[j][i] ) ) {
+                if ( variable[m].equalsIgnoreCase( matriz[j][m] ) ) {
                     
                 }
             }
@@ -147,6 +148,25 @@ public static void main(String[] args) {
         System.out.println();
     }
     
+//    System.out.println("************** Probabilidad Marginal *********************");
+//    for (Map.Entry<String, String[]> entrySet : atributos.entrySet()) {
+//        String key = entrySet.getKey();
+//        System.out.println("KEY : " + key);
+//        String[] value = entrySet.getValue();
+//        for (String v : value) {
+//            System.out.print(v+",");
+//            
+//            for (int i = 0; i < 10; i++) {
+//                if ( v.equals( ) ) {
+//                    
+//                }
+//            }
+//        }
+//        System.out.println();
+//    }
+//    
+    
+    System.out.println("**************Datos*********************");
     System.out.println("contFilasDatos" + contFilasDatos);
     System.out.println("variable" + variable.length);
     System.out.println("********* MATRIZ DE DATOS ****************");
@@ -157,6 +177,9 @@ public static void main(String[] args) {
         System.out.println();
     }
    // System.out.println( atributos. );
+    
+    
+    
     
     System.out.println("*********VARIABLE****************");
     for (int i = 0; i < variable.length ; i++) {
