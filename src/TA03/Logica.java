@@ -89,17 +89,23 @@ public void leerDatos(){
                 if (pasoData) {
                    
                    String[] datos = linea.split(",");
-                  // System.out.println("########### DATA #########");
+                   System.out.println("########### DATA #########");
                    
                     for (int j = 0; j < variable.length ; j++) {
                         matriz[contFilasDatos][j] = datos[j]; 
                        System.out.print(" " +matriz[contFilasDatos][j]+" ");
                     }
+                    
+//                    for (int j = 0; j < 14 ; j++) {
+//                        matriz[contFilasDatos][j] = datos[j]; 
+//                       System.out.print(" " +matriz[contFilasDatos][j]+" ");
+//                    }
+                    
                     contFilasDatos++;
                     System.out.println();
                 }
                 
-                ///System.out.println("########### FIN DATA #########");
+                System.out.println("########### FIN DATA #########");
                 
                 if (linea.contains("@data")) {
                     pasoData = true;
@@ -109,6 +115,15 @@ public void leerDatos(){
             }
  
         }
+        
+        for (int j = 0; j < variable.length ; j++) {
+            String[] filas = new String[14];
+            for (int i = 0; i < 14; i++) {
+                filas[i] = matriz[i][j];
+            }
+            data.put(variable[j], filas);
+        }
+        
 
     } catch (FileNotFoundException ex) {
         Logger.getLogger(TA03.class.getName()).log(Level.SEVERE, null, ex);
@@ -116,19 +131,23 @@ public void leerDatos(){
     System.out.println("************************************************");
 }
 
-public static void calcularMarginal( String[][] matriz ){
-    
-    for (int m = 0; m < variable.length ; m++) {
-        for (int i = 0; i < variable.length ; i++) {
-            for (int j = 0; j < matriz.length; j++) {
-                if ( variable[m].equalsIgnoreCase( matriz[j][m] ) ) {
-                    
-                }
-            }
+public static double calcularMarginal( String va, String valor){
+    int cont = 0;
+    for (Map.Entry<String, String[]> entrySet : data.entrySet()) {
+        String key = entrySet.getKey();
+         if (key.equals(va)) {
+             String[] value = entrySet.getValue();
+             
+             for (String v : value) {
+                  if (v.equals(valor)) {
+                     cont++;
+                 }
+             }
         }
+
     }
-   
-    
+      double res = cont / (double) 14;
+    return res;
 }
 
 public static void main(String[] args) {
@@ -148,23 +167,20 @@ public static void main(String[] args) {
         System.out.println();
     }
     
-//    System.out.println("************** Probabilidad Marginal *********************");
-//    for (Map.Entry<String, String[]> entrySet : atributos.entrySet()) {
-//        String key = entrySet.getKey();
-//        System.out.println("KEY : " + key);
-//        String[] value = entrySet.getValue();
-//        for (String v : value) {
-//            System.out.print(v+",");
-//            
-//            for (int i = 0; i < 10; i++) {
-//                if ( v.equals( ) ) {
-//                    
-//                }
-//            }
-//        }
-//        System.out.println();
-//    }
-//    
+     System.out.println("**************DATA HASH*********************");
+    for (Map.Entry<String, String[]> entrySet : data.entrySet()) {
+        String key = entrySet.getKey();
+        System.out.println("KEY : " + key);
+        String[] value = entrySet.getValue();
+        for (String v : value) {
+            System.out.print(v+",");
+        }
+        System.out.println();
+    }
+    
+   
+    System.out.println("**************IMPRIME*********************");
+    System.out.println(calcularMarginal("windy", "TRUE"));
     
     System.out.println("**************Datos*********************");
     System.out.println("contFilasDatos" + contFilasDatos);

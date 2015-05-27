@@ -14,5 +14,5 @@
 **  Debe permitir ingresar una (01) relacion A -> B, donde A y B son dos variables cualquiera mientras que
     el resto de variables permanecen independientes. Esto lo debe ingresar el usuario.
 
-**  Debe calcular la distribucion conjunta con todas las variables independientes y debe calcular la distribucion
+**  Debe calcular la distribucion conjunta con todas las variables independientes y debe calcular la distribucion
     conjunta con 01 relacion A -> B mientras que el resto de variables permanecen independientes.
