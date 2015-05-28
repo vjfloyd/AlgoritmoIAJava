@@ -42,11 +42,11 @@ public void leerDatos(){
     atributos = new HashMap<String, String[]>();
     data = new HashMap<String, String[]>();
     variable = new String[5];
-    matriz = new String[20][5];
+    matriz = new String[14][5];
     
     try {
-        //Scanner punteroArchivo = new Scanner( new FileReader( "F:\\UNIVERSIDAD\\2015-1\\IA\\weather.nominal.txt" ) );
-        Scanner punteroArchivo = new Scanner( new FileReader( "/Users/vjrojasb/2015-1/IA/weather.nominal.txt" ) );
+        Scanner punteroArchivo = new Scanner( new FileReader( "F:\\UNIVERSIDAD\\2015-1\\IA\\weather.nominal.txt" ) );
+        //Scanner punteroArchivo = new Scanner( new FileReader( "/Users/vjrojasb/2015-1/IA/weather.nominal.txt" ) );
         String linea=""; 
 
         while( punteroArchivo.hasNextLine() ){
@@ -141,11 +141,47 @@ public static void main(String[] args) {
         String key = entrySet.getKey();
         System.out.println("KEY : " + key);
         String[] value = entrySet.getValue();
-        for (String v : value) {
-            System.out.print(v+",");
+        
+        for (int i= 0; i < value.length; i++) {
+            
+            System.out.print(value[i] +",");
+        }
+//        for (String v : value) {
+//            System.out.print(v+",");
+//        }
+        System.out.println();
+    }
+    
+    int[] incidencias = new int[matriz[0].length];
+     for (int i = 0; i < incidencias.length ; i++) {
+        incidencias[i] = 0;
+    }
+    int cont = 0;
+     System.out.println("************** Probabilidad Marginal *********************");
+    for (Map.Entry<String, String[]> entrySet : atributos.entrySet()) {
+        String key = entrySet.getKey();
+        System.out.println("KEY : " + key);
+        String[] value = entrySet.getValue();
+        //for (String v : value) {
+        for (int j= 0; j < value.length; j++) {
+            
+            System.out.print(value[j] +"-");
+            
+            for (int i = 0; i < matriz.length ; i++) {
+                if ( value[j].equals( matriz[i][j] ) ) {
+                    incidencias[j] = cont++;
+                }
+            }
+             System.out.println("cont =" + cont);
+             System.out.println("total =" + matriz.length);
+             
+            double vm = cont / (double) 14;
+            System.out.println("La variable marginal de " + value[j] + " = " + vm );
+            cont = 0;
         }
         System.out.println();
     }
+    
     
     System.out.println("contFilasDatos" + contFilasDatos);
     System.out.println("variable" + variable.length);

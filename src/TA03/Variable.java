@@ -14,17 +14,24 @@ import java.util.List;
  */
 public class Variable {
     private String nombre;
-    private ArrayList<Valor> vaValores;
-    
+    private String valor;
+    private List<Valor> valoresVA;
+ 
     public Variable(){
-        vaValores = new ArrayList<Valor>();
-        
+        valoresVA = new ArrayList();
     }
     
-    public double calculaProbabilidadMarginal(int numIncidencias, int total){
+    public void agregarValor(Valor v){
+        valoresVA.add(v);
+    }
+    
+    public Valor getValor(int indice){
+        return valoresVA.get(indice);
+    }
+    
+     public double calculaProbabilidadMarginal(int numIncidencias, int total){
         return  numIncidencias/total;
     }
-
     public String getNombre() {
         return nombre;
     }
@@ -34,20 +41,23 @@ public class Variable {
     }
     
     public List<Valor> getValores() {
-        return vaValores;
+        return valoresVA;
     }
 
     public void setValores(List<Valor> valores) {
-        this.vaValores = (ArrayList<Valor>) valores;
+        this.valoresVA = valores;
     }
 
-    public void agregarValor(Valor v){
-        vaValores.add(v);
+    public String getValor() {
+        return valor;
     }
-    
-    public Valor getValor(int indice){
-        return vaValores.get(indice);
+
+    public void setValor(String valor) {
+        this.valor = valor;
     }
+
     
+   
     
+   
 }

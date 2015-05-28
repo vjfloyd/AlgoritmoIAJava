@@ -3,22 +3,17 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package TA03;
 
 /**
  *
- * @author vjrojasb
+ * @author Vj
  */
-public class Valor {
-    private String nombre;
+public class ProbMarginal {
     
-    public String getNombre() {
-        return nombre;
+    public int calculaProMarginal (){
+            
+        
+        return 0;
     }
-
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }
-
 }
