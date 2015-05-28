@@ -5,6 +5,7 @@
  */
 package TA03;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -13,7 +14,12 @@ import java.util.List;
  */
 public class Variable {
     private String nombre;
-    private List<Valor> listaValores;
+    private ArrayList<Valor> vaValores;
+    
+    public Variable(){
+        vaValores = new ArrayList<Valor>();
+        
+    }
     
     public double calculaProbabilidadMarginal(int numIncidencias, int total){
         return  numIncidencias/total;
@@ -28,19 +34,19 @@ public class Variable {
     }
     
     public List<Valor> getValores() {
-        return listaValores;
+        return vaValores;
     }
 
     public void setValores(List<Valor> valores) {
-        this.listaValores = valores;
+        this.vaValores = (ArrayList<Valor>) valores;
     }
 
     public void agregarValor(Valor v){
-        listaValores.add(v);
+        vaValores.add(v);
     }
     
     public Valor getValor(int indice){
-        return listaValores.get(indice);
+        return vaValores.get(indice);
     }
     
     

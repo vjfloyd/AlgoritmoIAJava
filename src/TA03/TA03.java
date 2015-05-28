@@ -163,7 +163,21 @@ public static void main(String[] args) {
         System.out.println(variable[i]);
     }
    // System.out.println("###" :  atributos.g );
-}
-
-
+    
+     System.out.println("********* marginal ****************");
+  
+     for (Map.Entry<String, String[]> entrySet : atributos.entrySet()) {
+        String key = entrySet.getKey();
+        System.out.println("KEY : " + key);
+        String[] value = entrySet.getValue();
+        for (String v : value) {
+            System.out.print(v+",");
+        }
+        System.out.println();
+    }
+     
+     
+     
+     
+  }
 }
