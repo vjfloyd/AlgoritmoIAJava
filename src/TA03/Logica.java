@@ -44,9 +44,6 @@ public void leerDatos(){
     variable = new String[5];
     matriz = new String[20][5];
    
-    
-   
-    
     try {
         Scanner punteroArchivo = new Scanner( new FileReader( "F:\\UNIVERSIDAD\\2015-1\\IA\\weather.nominal.txt" ) );
        // Scanner punteroArchivo = new Scanner( new FileReader( "/Users/vjrojasb/2015-1/IA/weather.nominal.txt" ) );
@@ -54,68 +51,41 @@ public void leerDatos(){
 
         while( punteroArchivo.hasNextLine() ){
              linea = punteroArchivo.nextLine();
-
-           
             try {
-                
-                if ( linea.contains("attribute")) {
-                    String temp = linea.toString().replace("{", "");
-                    temp = temp.replace("@", "");
-                    temp = temp.replace("}", "");
-                    temp =  temp.replace(",", "");
+                    if ( linea.contains("attribute")) {
+                        String temp = linea.toString().replace("{", "");
+                        temp = temp.replace("@", "");
+                        temp = temp.replace("}", "");
+                        temp =  temp.replace(",", " ");
 
-                    String[] tempVariable = temp.split(" ");
-                    String[] valores = new String[tempVariable.length-2]; 
-                     Variable objVariable = new Variable();        
-                             
-                    for (int i = 0; i < tempVariable.length-2 ; i++) {
-                        Valor valor = new Valor();
-                        valor.setNombre(tempVariable[i+2]);
-                        objVariable.agregarValor(valor);
-                       
-                        valores[i] = tempVariable[i+2]; 
-                        System.out.println("var = "+valores[i]);
-                        System.out.println("OBJvar = "+ objVariable.getValor(i).getNombre());    
+                        String[] tempVariable = temp.split(" ");
+                        String[] valores = new String[tempVariable.length-2]; 
+                        Variable objVariable = new Variable();        
+                        for (int i = 0; i < tempVariable.length-2 ; i++) {
+                            Valor valor = new Valor();
+                            valor.setNombre(tempVariable[i+2]);
+                            objVariable.agregarValor(valor);
+                            valores[i] = tempVariable[i+2]; 
+                            System.out.println("var = "+valores[i]);
+                            System.out.println("OBJvar = "+ objVariable.getValor(i).getNombre());    
+                        }
+                        atributos.put( tempVariable[1] , valores );
+                        variable[cont] = tempVariable[1]; 
+                        cont++;
+                    } 
+                    if (pasoData) {
+                       String[] datos = linea.split(",");
+                       for (int j = 0; j < variable.length ; j++) {
+                            matriz[contFilasDatos][j] = datos[j]; 
+                       }
+                       contFilasDatos++;
                     }
-                   
-                    atributos.put( tempVariable[1] , valores );
-                    variable[cont] = tempVariable[1]; 
-                   // if (cont < 5) {
-                        System.out.println("VARIABLE " + variable[cont]);
-                        System.out.println(cont);
-                   // }
-                    cont++;
-                } 
-                if (pasoData) {
-                   
-                   String[] datos = linea.split(",");
-                   System.out.println("########### DATA #########");
-                   
-                    for (int j = 0; j < variable.length ; j++) {
-                        matriz[contFilasDatos][j] = datos[j]; 
-                       System.out.print(" " +matriz[contFilasDatos][j]+" ");
+                    if (linea.contains("@data")) {
+                        pasoData = true;
                     }
-                    
-//                    for (int j = 0; j < 14 ; j++) {
-//                        matriz[contFilasDatos][j] = datos[j]; 
-//                       System.out.print(" " +matriz[contFilasDatos][j]+" ");
-//                    }
-                    
-                    contFilasDatos++;
-                    System.out.println();
+                } catch (Exception e) {
                 }
-                
-                System.out.println("########### FIN DATA #########");
-                
-                if (linea.contains("@data")) {
-                    pasoData = true;
-                }
-      
-             } catch (Exception e) {
-            }
- 
         }
-        
         for (int j = 0; j < variable.length ; j++) {
             String[] filas = new String[14];
             for (int i = 0; i < 14; i++) {
@@ -123,7 +93,6 @@ public void leerDatos(){
             }
             data.put(variable[j], filas);
         }
-        
 
     } catch (FileNotFoundException ex) {
         Logger.getLogger(TA03.class.getName()).log(Level.SEVERE, null, ex);
@@ -137,71 +106,52 @@ public static double calcularMarginal( String va, String valor){
         String key = entrySet.getKey();
          if (key.equals(va)) {
              String[] value = entrySet.getValue();
-             
-             for (String v : value) {
-                  if (v.equals(valor)) {
+             for (String v : value) 
+                  if (v.equals(valor)) 
                      cont++;
-                 }
-             }
+               
         }
 
     }
+    
+    System.out.println(" cont " + cont);
       double res = cont / (double) 14;
     return res;
 }
 
-public static double calculaProbCondicional(String varA, String valorA, String varB, String valorB){
-    
+public static double calculaProbCondicional(String vaA, String valorA, String vaB, String valorB){
+    //  P(A/B) =  P(A) int P(B) / P(B)
     int[] coincidencias = new int[14];
-    int cont = 0;        
-    
+    int contIncidencias = 0;        
     
     for (Map.Entry<String, String[]> entrySet : data.entrySet()) {
         String key = entrySet.getKey();
-         if (key.equals(varB)) {
+        if (key.equalsIgnoreCase(vaB)) {
              String[] value = entrySet.getValue();
              for (int i = 0; i < value.length ; i++) {
                    if ( valorB.equalsIgnoreCase( value[i] )) {
-                       coincidencias[cont] = i;
-                       cont++;
+                       coincidencias[contIncidencias] = i;
+                       contIncidencias++;
                  }
              }
         }
     }
-    cont = 0;
+    int contI = 0;
     for (Map.Entry<String, String[]> entrySet : data.entrySet()) {
         String key = entrySet.getKey();
-         if (key.equals(varA)) {
+         if (key.equalsIgnoreCase(vaA)) {
              String[] value = entrySet.getValue();
-             for (int i = 0; i < coincidencias.length ; i++) {
-                   if ( valorB.equalsIgnoreCase( value[coincidencias[i]] )) {
-                       coincidencias[cont] = i;
-                       cont++;
+             for (int i = 0; i < contIncidencias ; i++) {
+                   if ( valorA.equalsIgnoreCase( value[coincidencias[i]] )) {
+                       contI++;
                  }
              }
         }
     }
     
-    double  numerador = cont/14;
-  
-      cont = 0;      
-      for (Map.Entry<String, String[]> entrySet : data.entrySet()) {
-        String key = entrySet.getKey();
-         if (key.equals(varA)) {
-             String[] value = entrySet.getValue();
-             for (String v : value) {
-                  if (v.equals(valorA)) {
-                     cont++;
-                 }
-             }
-        }
-
-    }
-      double denominador = cont/14;
-      
-     return numerador/denominador;
-      
- 
+    double  numerador = contI/(double)14;
+    double denominador = calcularMarginal(vaB, valorB);
+    return numerador/denominador;
 }
 
 
@@ -211,57 +161,46 @@ public static void main(String[] args) {
     Logica obj =  new Logica();
     obj.leerDatos();
    
+    double var = calculaProbCondicional("humidity","high","play","yes");
+            
+    System.out.println("*********PROBABILIDAD CONDICIONAL****************");
+    System.out.println( var );
 
-    System.out.println("**************Datos*********************");
-    for (Map.Entry<String, String[]> entrySet : atributos.entrySet()) {
-        String key = entrySet.getKey();
-        System.out.println("KEY : " + key);
-        String[] value = entrySet.getValue();
-        for (String v : value) {
-            System.out.print(v+",");
-        }
-        System.out.println();
-    }
-    
-     System.out.println("**************DATA HASH*********************");
     for (Map.Entry<String, String[]> entrySet : data.entrySet()) {
         String key = entrySet.getKey();
-        System.out.println("KEY : " + key);
-        String[] value = entrySet.getValue();
-        for (String v : value) {
-            System.out.print(v+",");
+         if ( key.equalsIgnoreCase("play")) {
+             System.out.println(key);
         }
-        System.out.println();
     }
     
-   
-    System.out.println("**************IMPRIME*********************");
-    System.out.println(calcularMarginal("windy", "TRUE"));
-    
-    System.out.println("**************Datos*********************");
-    System.out.println("contFilasDatos" + contFilasDatos);
-    System.out.println("variable" + variable.length);
-    System.out.println("********* MATRIZ DE DATOS ****************");
-    for (int i = 0; i < contFilasDatos ; i++) {
-        for (int j = 0; j < variable.length ; j++) {
-            System.out.print(matriz[i][j] + "-" );
-        }
-        System.out.println();
-    }
-   // System.out.println( atributos. );
     
     
+//    System.out.println(" mar " + calcularMarginal("humidity", "normal"));
+//    
+//    System.out.println("**************Datos*********************");
+//    for (Map.Entry<String, String[]> entrySet : atributos.entrySet()) {
+//        String key = entrySet.getKey();
+//        System.out.println("KEY : " + key);
+//        String[] value = entrySet.getValue();
+//        for (String v : value) {
+//            System.out.print(v+",");
+//        }
+//        System.out.println();
+//    }
+//    
+//     System.out.println("**************Uso de MapHash para almacenar la Data *********************");
+//    for (Map.Entry<String, String[]> entrySet : data.entrySet()) {
+//        String key = entrySet.getKey();
+//        System.out.println("KEY : " + key);
+//        String[] value = entrySet.getValue();
+//        for (String v : value) {
+//            System.out.print(v+",");
+//        }
+//        System.out.println();
+//    }
     
     
-    System.out.println("*********VARIABLE****************");
-    for (int i = 0; i < variable.length ; i++) {
-        System.out.println(variable[i]);
-    }
-   // System.out.println("###" :  atributos.g );
-    
-    System.out.println("*********PROBABILIDAD CONDICIONAL****************");
-    System.out.println(calculaProbCondicional("windy","true","play","yes"));
-
+  
     
     }
 }
