@@ -3,13 +3,30 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+<<<<<<< HEAD
             <file>file:/F:/UNIVERSIDAD/2015-1/IA/AlgoritmoIAJava/src/TA03/Logica.java</file>
+=======
+<<<<<<< HEAD
+            <file>file:/Users/vjrojasb/2015-1/IA/cods/AlgoritmoIAJava/src/TA03/Relacion.java</file>
+            <file>file:/Users/vjrojasb/2015-1/IA/cods/AlgoritmoIAJava/src/TA03/ProbCondicional.java</file>
+            <file>file:/Users/vjrojasb/2015-1/IA/cods/AlgoritmoIAJava/src/TA03/Variable.java</file>
+            <file>file:/Users/vjrojasb/2015-1/IA/cods/AlgoritmoIAJava/src/TA03/Logica.java</file>
+            <file>file:/Users/vjrojasb/2015-1/IA/cods/AlgoritmoIAJava/src/TA03/Datos/Hipica.txt</file>
+            <file>file:/Users/vjrojasb/2015-1/IA/cods/AlgoritmoIAJava/src/TA03/Datos/weather.nominal.txt</file>
+            <file>file:/Users/vjrojasb/2015-1/IA/cods/AlgoritmoIAJava/src/TA03/Datos/Indicaciones.txt</file>
+            <file>file:/Users/vjrojasb/2015-1/IA/cods/AlgoritmoIAJava/src/TA03/TA03.java</file>
+=======
+>>>>>>> 4a5f828e4ad6db90b2501d8358e5d0166517b1f7
             <file>file:/F:/UNIVERSIDAD/2015-1/IA/AlgoritmoIAJava/src/TA03/TA03.java</file>
             <file>file:/F:/UNIVERSIDAD/2015-1/IA/AlgoritmoIAJava/src/TA03/ProbMarginal.java</file>
             <file>file:/F:/UNIVERSIDAD/2015-1/IA/AlgoritmoIAJava/src/TA03/ManejarCalculos.java</file>
             <file>file:/F:/UNIVERSIDAD/2015-1/IA/AlgoritmoIAJava/src/TA03/Datos/Indicaciones.txt</file>
             <file>file:/F:/UNIVERSIDAD/2015-1/IA/AlgoritmoIAJava/src/TA03/Datos/weather.nominal.txt</file>
+<<<<<<< HEAD
             <file>file:/F:/UNIVERSIDAD/2015-1/IA/AlgoritmoIAJava/src/TA03/ProbCondicional.java</file>
+=======
+>>>>>>> e391fcf9ad09c46dd109966f794eacfb99fa1f8c
+>>>>>>> 4a5f828e4ad6db90b2501d8358e5d0166517b1f7
         </group>
     </open-files>
 </project-private>

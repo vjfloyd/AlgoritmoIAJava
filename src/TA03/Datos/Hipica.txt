@@ -1,10 +1,10 @@
 @relation CarreraCaballos
 
-@attribute outlook {sunny, overcast, rainy}
-@attribute temperature {hot, mild, cool}
-@attribute humidity {high, normal}
-@attribute windy {TRUE, FALSE}
-@attribute play {yes, no}
+@attribute jinetePeso {muyligero, ligero}
+@attribute jineteEstatura { pequeno , mediano}
+@attribute humidity { alto, normal}
+@attribute habilidad { bajo, medio , alto}
+@attribute gano {yes, no}
 
 @data
 sunny,hot,high,FALSE,no
