@@ -19,8 +19,12 @@ public class ManejarCalculos {
     public static void main(String[] args) throws FileNotFoundException {
         
         Variable obj = new Variable();
-        LeerData objLeer = new LeerData();
-        objLeer.leerVA();
+        //LeerData objLeer = new LeerData();
+        //objLeer.leerVA();
+        LeerData objLeer2 = new LeerData();
+        
+        objLeer2.leerData();
+        
        
         /*
                 Para toda la columna de Datos

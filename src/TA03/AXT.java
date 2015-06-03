@@ -11,11 +11,12 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
- 
+import java.math.MathContext;
 /**
  *
  * @author Vj
@@ -42,6 +43,10 @@ public class AXT {
     private static String[] variable2;
     private static ArrayList<String> lista2 = new ArrayList<>();
     private static String[][] matriz2;
+    private static List<String> arregloHijos;
+    private static List<String> arregloPadres;
+    public static int cantVA = 13;
+    
 
     public void leerDatos() {
         String[] var;
@@ -55,10 +60,13 @@ public class AXT {
         matriz = new String[5989][13];
         try {
             //Scanner punteroArchivo = new Scanner( new FileReader( "F:\\UNIVERSIDAD\\2015-1\\IA\\TA3\\DatosAX\\AXTest.arff" ) );
-            Scanner punteroArchivo = new Scanner( new FileReader( "F:\\UNIVERSIDAD\\2015-1\\IA\\TA3\\DatosAX\\AX.arff" ) );
+            //Scanner punteroArchivo = new Scanner( new FileReader( "F:\\UNIVERSIDAD\\2015-1\\IA\\TA3\\DatosAX\\AX.arff" ) );
             //Scanner punteroArchivo = new Scanner( new FileReader( "/Users/vjrojasb/2015-1/IA/weather.nominal.txt" ) );
             //Scanner punteroArchivo = new Scanner(new FileReader("F:\\UNIVERSIDAD\\2015-1\\IA\\TA3\\DatosCaso\\A1.arff"));
-
+            //Scanner punteroArchivo = new Scanner( new FileReader( "E:\\weather.nominal.txt" ) );
+            Scanner punteroArchivo = new Scanner( new FileReader( "E:\\AX.arff" ) );
+   
+             
             String linea = "";
 
             while (punteroArchivo.hasNextLine()) {
@@ -68,7 +76,7 @@ public class AXT {
                         String temp = linea.toString().replace("{", "");
                         temp = temp.replace("@", "");
                         temp = temp.replace("}", "");
-                        temp = temp.replace(",", " ");
+                        temp = temp.replace(",", "");
 
                         String[] tempVariable = temp.split(" ");
                         System.out.println("########### Atributo : [variables]");
@@ -215,6 +223,21 @@ public class AXT {
         return res;
 
     }
+    public static int cantIncidencias(String va, String valor){
+        int cont = 0;
+        for (Map.Entry<String, String[]> entrySet : data.entrySet()) {
+            String key = entrySet.getKey();
+            if (key.equalsIgnoreCase(va)) {
+                String[] value = entrySet.getValue();
+                for (String v : value) {
+                    if (v.equalsIgnoreCase(valor)) {
+                        cont++;
+                    }
+                }
+            }
+        }
+        return cont;
+    }
 
     public double clasificarInstancias() {
 
@@ -262,8 +285,9 @@ public class AXT {
         return numerador / denominador;
     }
 
-    public static void agregarRelacion() {
-
+    public static void agregarRelacion(String padre, String hijo) {
+       arregloPadres.add(padre);
+       arregloPadres.add(hijo);
     }
     public static void calcularProbConjunta(){
         double p = 1.0;
@@ -294,16 +318,36 @@ public class AXT {
         }
     }
 
+    public static void calcularEntropiaNC() {
+         
+        double p = 1.0;
+        for (int i = 0; i < contFilasDatos; i++) {
+            for (int j = 0; j < cantVA; j++) {
+                int exp = cantIncidencias(variable[j], matriz[i][j]);
+                //p = p * calcularProbMarginal( variable[j], matriz[i][j]) ;
+                double tmp = calcularProbMarginal( variable[j], matriz[i][j]) ;
+                double sum = Math.pow(tmp , exp);
+                sum = sum + Math.log10( sum);
+            
+            }
+            System.out.println(" Entropia "+ "(" + i + ")" + "="+ p);
+            p = 1.0;
+        }   
+     }
+            
+    
+             
     public static void main(String[] args) {
 
         AXT obj = new AXT();
         obj.leerDatos();
-        Double var = obj.clasificarInstancias();
-        calcularProbMarginal("Edad", "GASTRICO");
-        calcularDistribucionMarginal();
+       // Double var = obj.clasificarInstancias();
+       // calcularProbMarginal("Edad", "GASTRICO");
+        //calcularDistribucionMarginal();
         //double varc = calculaProbCondicional("medicamentos", "AMOXICILINA500", "ocupaciones", "MEDICO");
         //System.out.println(" Prob condicional " + varc);
-         calcularProbConjunta();
+        // calcularProbConjunta();
+         calcularEntropiaNC();
 //        for (int i = 0; i < 13; i++) {
 //            System.out.println(" p " + variable[i]);
 //        }

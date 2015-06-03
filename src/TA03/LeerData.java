@@ -57,8 +57,34 @@ public class LeerData {
         
     }
     
-    public List<List<String>> leerData(){
-        return null;
+    public List<Variable> leerData() throws FileNotFoundException{
+        String[] matriz;
+     List<String> valoresFila = new ArrayList<>();   
+        
+     //Scanner punteroArchivo = new Scanner( new FileReader( "F:\\UNIVERSIDAD\\2015-1\\IA\\weather.nominal.txt" ) );
+     Scanner punteroArchivo = new Scanner( new FileReader( "E:\\weather.nominal.txt" ) );
+    
+   
+       // Scanner punteroArchivo = new Scanner( new FileReader( "/Users/vjrojasb/2015-1/IA/weather.nominal.txt" ) );
+        String linea=""; 
+        
+        while( punteroArchivo.hasNextLine() ){
+             linea = punteroArchivo.nextLine();
+            try {
+                    if ( linea.contains("@data")) {
+                        String tempLine = linea.toString().replace(",", "");
+                        String[] lineaValores = tempLine.split(" ");
+                        for (int i = 0; i < lineaValores.length; i++) {
+                            valoresFila.add(lineaValores[i]);
+                        }
+                        
+                        
+                        
+                    }
+                } catch (Exception e) {
+                }
+        }
+        return tempLista;
     }
     
 }
