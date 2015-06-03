@@ -6,10 +6,10 @@
     valores. @data indica que a continuacion vienen los datos. Se recomienda abrir esos archivos con Notepad++ 
     para su visualizacion.
 
-**  Calcular la probabilidad condicional P (A/B), donde A y B son dos variables cualquiera del conjunto de
+**  Calcular la probabilidad condicional P(A/B), donde A y B son dos variables cualquiera del conjunto de
     datos. Esto lo debe ingresar el usuario.
 
-**  Calcular la distribucion marginal de cada variable P (A) a partir del conjunto de datos.
+**  Calcular la distribucion marginal de cada variable P(A) a partir del conjunto de datos.
 
 **  Debe permitir ingresar una (01) relacion A -> B, donde A y B son dos variables cualquiera mientras que
     el resto de variables permanecen independientes. Esto lo debe ingresar el usuario.

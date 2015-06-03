@@ -6,7 +6,11 @@
 package TA03.Datos.Pruebas;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
+import java.util.Iterator;
+import java.util.List;
+import java.util.ListIterator;
 import java.util.Map;
 
 /**
@@ -109,6 +113,18 @@ public class Pruebas {
 
         System.out.println(row);
         System.out.println(col);
+        
+        List<String> first;// = new List<String> { "one", "two", "three" };
+        List<String> second;// = new List<String> { "four", "five", "six" };
+
+        first = new ArrayList<>();
+        
+        first.add("uno");
+        first.add("dos");
+        
+        
+        
+        
     }
     
     

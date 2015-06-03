@@ -14,7 +14,6 @@ import java.util.List;
  */
 public class Variable {
     private String nombre;
-    private String valor;
     private List<Valor> valoresVA;
  
     public Variable(){
@@ -29,7 +28,7 @@ public class Variable {
         return valoresVA.get(indice);
     }
     
-     public double calculaProbabilidadMarginal(int numIncidencias, int total){
+    public double calculaProbabilidadMarginal(int numIncidencias, int total){
         return  numIncidencias/total;
     }
     public String getNombre() {
@@ -48,16 +47,5 @@ public class Variable {
         this.valoresVA = valores;
     }
 
-    public String getValor() {
-        return valor;
-    }
-
-    public void setValor(String valor) {
-        this.valor = valor;
-    }
-
-    
-   
-    
    
 }
