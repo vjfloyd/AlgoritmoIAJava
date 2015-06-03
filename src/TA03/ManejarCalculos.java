@@ -5,6 +5,8 @@
  */
 package TA03;
 
+import java.io.FileNotFoundException;
+
 /**
  *
  * @author Vj
@@ -14,13 +16,12 @@ public class ManejarCalculos {
     /**
      * @param args the command line arguments
      */
-    public static void main(String[] args) {
+    public static void main(String[] args) throws FileNotFoundException {
         
-        Variable vaA = new Variable();
-        
-        vaA.setNombre("temperature");
-        vaA.setValor("hot");
-        
+        Variable obj = new Variable();
+        LeerData objLeer = new LeerData();
+        objLeer.leerVA();
+       
         /*
                 Para toda la columna de Datos
                     si vaA == columna_x entonces
