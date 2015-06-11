@@ -109,9 +109,7 @@ public static double calcularMarginal( String va, String valor){
              for (String v : value) 
                   if (v.equals(valor)) 
                      cont++;
-               
         }
-
     }
     
     System.out.println(" cont " + cont);

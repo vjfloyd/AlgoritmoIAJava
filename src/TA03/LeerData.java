@@ -16,13 +16,13 @@ import java.util.Scanner;
  * @author Vj
  */
 public class LeerData {
-    List<Variable> tempLista = new ArrayList<>();
-       
-    public List<Variable> leerVA() throws FileNotFoundException{
-     Scanner punteroArchivo = new Scanner( new FileReader( "F:\\UNIVERSIDAD\\2015-1\\IA\\weather.nominal.txt" ) );
+   
+    public List<Variable> leerVA( String archivo ) throws FileNotFoundException{
+     Scanner punteroArchivo = new Scanner( new FileReader( archivo ) );
        // Scanner punteroArchivo = new Scanner( new FileReader( "/Users/vjrojasb/2015-1/IA/weather.nominal.txt" ) );
-        String linea=""; 
-        
+       String linea="";
+       ConjuntoVA conjVA = new ConjuntoVA();
+       
         while( punteroArchivo.hasNextLine() ){
              linea = punteroArchivo.nextLine();
             try {
@@ -33,7 +33,7 @@ public class LeerData {
                         temp =  temp.replace(",", "");
 
                         String[] tempVariable = temp.split(" ");
-                        String[] valores = new String[tempVariable.length-2]; 
+                       // String[] valores = new String[tempVariable.length-2]; 
                         Variable objVA = new Variable(); 
                         
                         for (int i = 0; i < tempVariable.length ; i++) {
@@ -45,46 +45,45 @@ public class LeerData {
                                 valor.setNombre(tempVariable[i]);
                                 objVA.agregarValor(valor);
                             }
-                            
                         }
-                          tempLista.add(objVA);
+                        conjVA.Variables.add(objVA);
                     }
-                  
                 } catch (Exception e) {
                 }
         }
-        return tempLista;
-        
+        return conjVA.Variables;
     }
-    
-    public List<Variable> leerData() throws FileNotFoundException{
-        String[] matriz;
-     List<String> valoresFila = new ArrayList<>();   
-        
-     //Scanner punteroArchivo = new Scanner( new FileReader( "F:\\UNIVERSIDAD\\2015-1\\IA\\weather.nominal.txt" ) );
-     Scanner punteroArchivo = new Scanner( new FileReader( "E:\\weather.nominal.txt" ) );
-    
-   
-       // Scanner punteroArchivo = new Scanner( new FileReader( "/Users/vjrojasb/2015-1/IA/weather.nominal.txt" ) );
-        String linea=""; 
-        
+    public List<List<Valor>> leerData(String archivo  ) throws FileNotFoundException{
+     
+     Data data = new Data();
+     Boolean paso = false; 
+     //String archivo = "F:\\UNIVERSIDAD\\2015-1\\IA\\weather.nominal.txt"; 
+     Scanner punteroArchivo = new Scanner( new FileReader( archivo ) );
+     //Scanner punteroArchivo = new Scanner( new FileReader( "E:\\weather.nominal.txt" ) );
+     // Scanner punteroArchivo = new Scanner( new FileReader( "/Users/vjrojasb/2015-1/IA/weather.nominal.txt" ) );
+     String linea=""; 
         while( punteroArchivo.hasNextLine() ){
              linea = punteroArchivo.nextLine();
             try {
-                    if ( linea.contains("@data")) {
-                        String tempLine = linea.toString().replace(",", "");
+                    if (paso) {
+                        String tempLine = linea.toString().replace(",", " ");
                         String[] lineaValores = tempLine.split(" ");
+                        List<Valor> valoresFila = new ArrayList<>();   
                         for (int i = 0; i < lineaValores.length; i++) {
-                            valoresFila.add(lineaValores[i]);
+                            Valor valor = new Valor();
+                            valor.setNombre(lineaValores[i]);
+                            valoresFila.add(valor);
                         }
                         
-                        
-                        
+                        data.dataMatriz.add(valoresFila);
+                    }
+                    if ( linea.contains("@data")) {
+                        paso = true;
                     }
                 } catch (Exception e) {
                 }
         }
-        return tempLista;
+        return data.dataMatriz;
     }
     
 }

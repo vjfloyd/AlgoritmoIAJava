@@ -5,20 +5,37 @@
  */
 package TA03;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  *
- * @author alumnos
+ * @author Vj
  */
 public class Data {
     
-    private Variable listaDatos;
+    List<List<Valor>> dataMatriz;
 
-    public Variable getListaDatos() {
-        return listaDatos;
+    public Data() {
+        dataMatriz = new ArrayList();
     }
 
-    public void setListaDatos(Variable listaDatos) {
-        this.listaDatos = listaDatos;
+    public List<List<Valor>> getDataMatriz() {
+        return dataMatriz;
+    }
+
+    public void setDataMatriz(List<List<Valor>> dataMatriz) {
+        this.dataMatriz = dataMatriz;
+    }
+      
+    public void agregarArreglo(List<Valor> linea){
+        dataMatriz.add(linea);
     }
     
+//    void agregarArreglo(String[] arreglo) {
+//        dataMatriz.add(arreglo);
+//    }
+   
 }
+
+

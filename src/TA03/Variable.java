@@ -15,7 +15,7 @@ import java.util.List;
 public class Variable {
     private String nombre;
     private List<Valor> valoresVA;
- 
+   
     public Variable(){
         valoresVA = new ArrayList();
     }
@@ -23,7 +23,7 @@ public class Variable {
     public void agregarValor(Valor v){
         valoresVA.add(v);
     }
-    
+      
     public Valor getValor(int indice){
         return valoresVA.get(indice);
     }

@@ -209,7 +209,7 @@ public class AXT {
         int cont = 0;
         for (Map.Entry<String, String[]> entrySet : data.entrySet()) {
             String key = entrySet.getKey();
-            if (key.equalsIgnoreCase(va)) {
+            if ( key.equalsIgnoreCase(va)) {
                 String[] value = entrySet.getValue();
                 for (String v : value) {
                     if (v.equalsIgnoreCase(valor)) {
