@@ -26,16 +26,25 @@ public class ManejarCalculos {
         
     } 
     
-    public double calcularProbabilidadMarginal( String valor, String variable){
-              
+    public int getIndiceVariable(String nombreVA){
+        int indice = 0;
+        for (Variable var : listaVA) {
+            if ( var.getNombre().equalsIgnoreCase(nombreVA)) {
+                 indice = listaVA.indexOf(var);
+            }
+        }
+        return indice;
+    }
+    public double calcularProbabilidadMarginal( String nombreVA, String valor){
         int cont = 0;
+        int indice = getIndiceVariable(nombreVA);
+        
         int ccc = listaValores.size();
-        System.out.println(" " + ccc  );
+        //System.out.println(" " + ccc  );
         for (int i = 0; i < listaValores.size() ; i++) {
-            if ( listaValores.get(i).get(0).getNombre().equalsIgnoreCase( valor) ) {
+            if ( listaValores.get(i).get(indice).getNombre().equalsIgnoreCase( valor) ) {
                 cont++;
             }
-          
         }
         double denominador = listaValores.size();
         double res = cont / (double) denominador;
@@ -43,10 +52,57 @@ public class ManejarCalculos {
 
         
     }
+    public double calcularProbabilidadCondicional(String vaA, String valorA, String vaB, String valorB ){
+        //  P(A/B) =  P(A) int P(B) / P(B)
+        int[] coincidencias = new int[listaValores.size()];
+        int contIncidencias = 0;
+        int cont = 0;
+        int indice = getIndiceVariable(vaB);
+        for (List<Valor> lista : listaValores) {
+             if (lista.get(indice).getNombre().equalsIgnoreCase(valorB)) {
+                coincidencias[contIncidencias] = cont;
+                 contIncidencias++;
+            }
+            cont++;
+        }
+        cont = 0;
+        int contIncidencias2=0;
+        contIncidencias = 0;
+        indice = getIndiceVariable(vaA);
+        for (List<Valor> lista : listaValores) {
+                if ( coincidencias[contIncidencias] == cont ) {
+                     if ( lista.get(indice).getNombre().equalsIgnoreCase(valorA) ) {
+                             contIncidencias2++;
+                      }
+                    contIncidencias++;
+                }
+            cont++;
+        }
+        
+        
+        double denominador = calcularProbabilidadMarginal(vaB, valorB);
+        double numerador = contIncidencias2 / (double) listaValores.size();
+        return numerador / denominador;
+    }
+    public void calcularProbabilidadConjunta(){
+        int index = 0, linea=0;
+        double pc = 1.0;
+        for (List<Valor> listaData : listaValores) {
+            for (Valor lista : listaData) {
+                 pc = pc *calcularProbabilidadMarginal(listaVA.get(index).getNombre(), lista.getNombre());
+                index++;
+            }
+            index = 0;
+            linea++;
+            System.out.println("Prob. Conj("+ linea +") = " + pc);
+        }
+       
+    }
     
     public static void main(String[] args) throws FileNotFoundException {
         
        String archivo = "F:\\UNIVERSIDAD\\2015-1\\IA\\weather.nominal.txt";
+      //  String archivo = "F:\\UNIVERSIDAD\\2015-1\\IA\\TA3\\DatosAX\\AXTest.arff"
 //       LeerData objva = new LeerData();
         
 //       List<Variable> listaVA =  objva.leerVA(archivo);
@@ -55,15 +111,19 @@ public class ManejarCalculos {
 //       List<List<Valor>>  listaValores =  objData.leerData();
 //       
        ManejarCalculos objCal = new ManejarCalculos(archivo);
-       
-      double res =  objCal.calcularProbabilidadMarginal("sunny","dd");
-        System.out.println(" res " + res);      
-      
+//       
+//       double res =  objCal.calcularProbabilidadMarginal("play","yes");
+//        System.out.println(" res " + res);      
+       double res2 =  objCal.calcularProbabilidadCondicional("outlook","overcast" ,"play","yes");
+        System.out.println(" res2 " + res2);     
+        
+        
+        objCal.calcularProbabilidadConjunta();
 //        for (Variable var : lista) {
 //            System.out.println(" " + var.getNombre() + ":"  );
 //            for (int i = 0; i < var.getValores().size() ; i++) {
 //                System.out.print( var.getValor(i).getNombre() + "," );
-//            }
+//            }  
 //            System.out.println();
 //        }
 // 
