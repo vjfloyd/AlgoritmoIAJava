@@ -6,6 +6,9 @@
 
 package TA03;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  *
  * @author vjrojasb
@@ -13,6 +16,55 @@ package TA03;
 public class Relacion {
     private Variable vaA;
     private Variable vaB;
+    private List<String> padres;
+    private List<String> hijos;
+    
+    public Relacion(){
+        padres = new ArrayList();
+        hijos = new ArrayList();  
+    }
+    
+    public void agregarHijo( String va){
+        hijos.add(va);
+    }
+    
+    public void agregarPadre( String va){
+        padres.add(va);
+    }
+    
+
+    public Variable getVaA() {
+        return vaA;
+    }
+
+    public void setVaA(Variable vaA) {
+        this.vaA = vaA;
+    }
+
+    public Variable getVaB() {
+        return vaB;
+    }
+
+    public void setVaB(Variable vaB) {
+        this.vaB = vaB;
+    }
+
+    public List<String> getPadres() {
+        return padres;
+    }
+
+    public void String(List<String> padres) {
+        this.padres = padres;
+    }
+
+    public List<String> getHijos() {
+        return hijos;
+    }
+
+    public void setHijos(List<String> hijos) {
+        this.hijos = hijos;
+    }
+    
     
     
 }

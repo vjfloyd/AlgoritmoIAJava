@@ -18,12 +18,13 @@ public class ManejarCalculos {
     LeerData leerData;
     List<Variable> listaVA;
     List<List<Valor>> listaValores;
-         
+    Relacion relaciones;
+    
     public ManejarCalculos( String archivo) throws FileNotFoundException{
         leerData = new LeerData();
         listaVA = leerData.leerVA(archivo);
         listaValores = leerData.leerData(archivo);
-        
+        relaciones =  new Relacion();
     } 
     
     public int getIndiceVariable(String nombreVA){
@@ -38,9 +39,6 @@ public class ManejarCalculos {
     public double calcularProbabilidadMarginal( String nombreVA, String valor){
         int cont = 0;
         int indice = getIndiceVariable(nombreVA);
-        
-        int ccc = listaValores.size();
-        //System.out.println(" " + ccc  );
         for (int i = 0; i < listaValores.size() ; i++) {
             if ( listaValores.get(i).get(indice).getNombre().equalsIgnoreCase( valor) ) {
                 cont++;
@@ -49,9 +47,54 @@ public class ManejarCalculos {
         double denominador = listaValores.size();
         double res = cont / (double) denominador;
         return res;
-
-        
     }
+    public void establecerRelaciones(String relacionA, String relacionB ){
+      // rA -> rB
+        if ( relacionA != relacionB ) {
+            relaciones.agregarHijo(relacionB);
+            relaciones.agregarPadre( relacionA);
+        }
+    }
+    
+    public void calcularProbabilidadConjuntaConRelaciones(){
+        // A , B, C
+        
+        int index = 0, linea=0;
+        double pc = 1.0;
+        //calcularProbabilidadMarginal( String nombreVA, String valor){
+        for (List<Valor> listaData : listaValores) {
+            for (Valor valor : listaData) {
+                String vaActual = listaVA.get(index).getNombre();
+                for (int i = 0; i < relaciones.getHijos().size()  ; i++) {
+                    if (   !vaActual.equalsIgnoreCase( relaciones.getHijos().get(i)) 
+                        && !vaActual.equalsIgnoreCase(relaciones.getPadres().get(i))
+                        || !vaActual.equalsIgnoreCase( relaciones.getHijos().get(i)) ) {
+                            pc = pc *calcularProbabilidadMarginal(vaActual, valor.getNombre());
+                            index++;
+                    }else{
+                          if ( vaActual.equalsIgnoreCase( relaciones.getHijos().get(i) )) {
+                               
+                              if (vaActual.equalsIgnoreCase( relaciones.getPadres().get(i) )) {
+                                  
+                              }
+                              
+                        }
+                         
+                        pc = pc * calcularProbabilidadCondicional(vaActual, vaActual, vaActual, vaActual);
+                    }
+                }
+                
+                
+               
+            }
+            index = 0;
+            linea++;
+            System.out.println("Prob. Conj("+ linea +") = " + pc);
+        }
+    }
+    
+    
+    
     public double calcularProbabilidadCondicional(String vaA, String valorA, String vaB, String valorB ){
         //  P(A/B) =  P(A) int P(B) / P(B)
         int[] coincidencias = new int[listaValores.size()];
@@ -88,8 +131,8 @@ public class ManejarCalculos {
         int index = 0, linea=0;
         double pc = 1.0;
         for (List<Valor> listaData : listaValores) {
-            for (Valor lista : listaData) {
-                 pc = pc *calcularProbabilidadMarginal(listaVA.get(index).getNombre(), lista.getNombre());
+            for (Valor valor : listaData) {
+                 pc = pc *calcularProbabilidadMarginal(listaVA.get(index).getNombre(), valor.getNombre());
                 index++;
             }
             index = 0;

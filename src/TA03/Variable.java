@@ -15,7 +15,7 @@ import java.util.List;
 public class Variable {
     private String nombre;
     private List<Valor> valoresVA;
-   
+       
     public Variable(){
         valoresVA = new ArrayList();
     }
