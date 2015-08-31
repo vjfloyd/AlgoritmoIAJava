@@ -65,6 +65,21 @@ public class Relacion {
         this.hijos = hijos;
     }
     
+    public String dameHijo(String padre){
+        int indice = 0;
+        for (int i = 0; i < padres.size(); i++) 
+            if ( padres.get(i).equalsIgnoreCase(padre) ) 
+                indice = i;
+      
+        return hijos.get(indice);
+    }
     
-    
+    public String damePadre(String hijo){
+        int indice = 0;
+        for (int i = 0; i < hijos.size() ; i++) 
+            if ( hijos.get(i).equalsIgnoreCase(hijo)) 
+                indice = i;
+            
+        return padres.get(indice);
+    }
 }

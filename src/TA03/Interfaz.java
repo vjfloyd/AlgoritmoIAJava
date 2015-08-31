@@ -5,17 +5,33 @@
  */
 package TA03;
 
+import java.io.FileNotFoundException;
+import java.text.DecimalFormat;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /**
  *
  * @author Vj
  */
 public class Interfaz extends javax.swing.JFrame {
 
-    /**
-     * Creates new form Interfaz
-     */
-    public Interfaz() {
+    ManejarCalculos mc;
+    String nombre_archivo = "F:\\UNIVERSIDAD\\2015-1\\IA\\TF\\audiology.arff";
+
+    public Interfaz() throws FileNotFoundException {
         initComponents();
+        mc = new ManejarCalculos(nombre_archivo);
+
+        List<String> lista = mc.getVA();
+
+        for (String valor : lista) {
+            vaA.addItem(valor);
+            vaB.addItem(valor);
+            vaADistMarg.addItem(valor);
+            vaRelacion.addItem(valor);
+        }
     }
 
     /**
@@ -27,21 +43,411 @@ public class Interfaz extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jTabbedPane3 = new javax.swing.JTabbedPane();
+        jPanel2 = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
+        vaADistMarg = new javax.swing.JComboBox();
+        jLabel2 = new javax.swing.JLabel();
+        valoresDistMarg = new javax.swing.JComboBox();
+        button1 = new java.awt.Button();
+        resultadoProbMarg = new javax.swing.JTextField();
+        jLabel3 = new javax.swing.JLabel();
+        jPanel3 = new javax.swing.JPanel();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
+        vaRelacion = new javax.swing.JComboBox();
+        valoresRelacion = new javax.swing.JComboBox();
+        jPanel4 = new javax.swing.JPanel();
+        jPanel1 = new javax.swing.JPanel();
+        jLabel6 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
+        jLabel9 = new javax.swing.JLabel();
+        probCondicional = new javax.swing.JButton();
+        resultadoProbCond = new javax.swing.JTextField();
+        jLabel10 = new javax.swing.JLabel();
+        vaA = new javax.swing.JComboBox();
+        valorVAa = new javax.swing.JComboBox();
+        vaB = new javax.swing.JComboBox();
+        valorVAb = new javax.swing.JComboBox();
+        jPanel5 = new javax.swing.JPanel();
+        jTextField4 = new javax.swing.JTextField();
+        jLabel11 = new javax.swing.JLabel();
+        valorK = new javax.swing.JTextField();
+        jButton3 = new javax.swing.JButton();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        jTabbedPane3.setFont(new java.awt.Font("Comic Sans MS", 1, 14)); // NOI18N
+
+        jPanel2.setFont(new java.awt.Font("Comic Sans MS", 1, 14)); // NOI18N
+
+        jLabel1.setText("Variable Aleatoria A");
+
+        vaADistMarg.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                vaADistMargActionPerformed(evt);
+            }
+        });
+
+        jLabel2.setText("Valor ");
+
+        valoresDistMarg.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                valoresDistMargActionPerformed(evt);
+            }
+        });
+
+        button1.setLabel("Calcular");
+        button1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                probMarginal(evt);
+            }
+        });
+
+        resultadoProbMarg.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                resultadoProbMargActionPerformed(evt);
+            }
+        });
+
+        jLabel3.setText("Resultado");
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(238, 238, 238)
+                .addComponent(button1, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addContainerGap(72, Short.MAX_VALUE)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(100, 100, 100)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(resultadoProbMarg, javax.swing.GroupLayout.DEFAULT_SIZE, 212, Short.MAX_VALUE)
+                    .addComponent(valoresDistMarg, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(vaADistMarg, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(155, 155, 155))
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(67, 67, 67)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(vaADistMarg, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(26, 26, 26)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(valoresDistMarg, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel2))
+                .addGap(75, 75, 75)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(resultadoProbMarg, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel3))
+                .addGap(85, 85, 85)
+                .addComponent(button1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(88, Short.MAX_VALUE))
+        );
+
+        button1.getAccessibleContext().setAccessibleName("");
+
+        jTabbedPane3.addTab("Probabilidad Marginal", jPanel2);
+
+        jLabel4.setText("Variable A");
+
+        jLabel5.setText("Variable B");
+
+        jButton1.setText("Validar Relacion");
+
+        vaRelacion.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                vaRelacionActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
+        jPanel3.setLayout(jPanel3Layout);
+        jPanel3Layout.setHorizontalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGap(109, 109, 109)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                                .addComponent(jLabel4)
+                                .addGap(149, 149, 149))
+                            .addGroup(jPanel3Layout.createSequentialGroup()
+                                .addComponent(jLabel5)
+                                .addGap(150, 150, 150)))
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(vaRelacion, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(valoresRelacion, 0, 100, Short.MAX_VALUE)))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGap(166, 166, 166)
+                        .addComponent(jButton1)))
+                .addContainerGap(244, Short.MAX_VALUE))
+        );
+        jPanel3Layout.setVerticalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addGap(56, 56, 56)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel4)
+                    .addComponent(vaRelacion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(57, 57, 57)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel5)
+                    .addComponent(valoresRelacion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(39, 39, 39)
+                .addComponent(jButton1)
+                .addContainerGap(218, Short.MAX_VALUE))
+        );
+
+        jTabbedPane3.addTab("Agregar Relaciones", jPanel3);
+
+        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
+        jPanel4.setLayout(jPanel4Layout);
+        jPanel4Layout.setHorizontalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 650, Short.MAX_VALUE)
+        );
+        jPanel4Layout.setVerticalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 433, Short.MAX_VALUE)
+        );
+
+        jTabbedPane3.addTab("Probabilidad Conjunta", jPanel4);
+
+        jLabel6.setText("Variable A : ");
+
+        jLabel7.setText("Variable B :");
+
+        jLabel8.setText("Valores A :");
+
+        jLabel9.setText("Valores B :");
+
+        probCondicional.setText("Calcular");
+        probCondicional.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                probCondicionalActionPerformed(evt);
+            }
+        });
+
+        jLabel10.setText("Resultado : ");
+
+        vaA.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                varAProbCond(evt);
+            }
+        });
+
+        vaB.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                vaBActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(101, 101, 101)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel6)
+                            .addComponent(jLabel8))
+                        .addGap(40, 40, 40)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(valorVAa, 0, 126, Short.MAX_VALUE)
+                            .addComponent(vaA, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(40, 40, 40)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel7)
+                            .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(47, 47, 47)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(valorVAb, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(vaB, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(135, 135, 135)
+                        .addComponent(jLabel10)
+                        .addGap(67, 67, 67)
+                        .addComponent(resultadoProbCond, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(246, 246, 246)
+                        .addComponent(probCondicional, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(45, Short.MAX_VALUE))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(55, 55, 55)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel6)
+                    .addComponent(vaA, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel7)
+                    .addComponent(vaB, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(28, 28, 28)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel9)
+                    .addComponent(valorVAb, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel8)
+                    .addComponent(valorVAa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(77, 77, 77)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel10)
+                    .addComponent(resultadoProbCond, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(57, 57, 57)
+                .addComponent(probCondicional)
+                .addContainerGap(133, Short.MAX_VALUE))
+        );
+
+        jTabbedPane3.addTab("Probabilidad Condicional", jPanel1);
+
+        jLabel11.setText("Indicar # de Padres máximo : ");
+
+        valorK.setText("    K :");
+        valorK.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                valorKActionPerformed(evt);
+            }
+        });
+
+        jButton3.setText("Guardar");
+
+        javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
+        jPanel5.setLayout(jPanel5Layout);
+        jPanel5Layout.setHorizontalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel5Layout.createSequentialGroup()
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel5Layout.createSequentialGroup()
+                        .addGap(194, 194, 194)
+                        .addComponent(valorK, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(45, 45, 45)
+                        .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel5Layout.createSequentialGroup()
+                        .addGap(218, 218, 218)
+                        .addComponent(jLabel11))
+                    .addGroup(jPanel5Layout.createSequentialGroup()
+                        .addGap(242, 242, 242)
+                        .addComponent(jButton3)))
+                .addContainerGap(254, Short.MAX_VALUE))
+        );
+        jPanel5Layout.setVerticalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel5Layout.createSequentialGroup()
+                .addGap(60, 60, 60)
+                .addComponent(jLabel11)
+                .addGap(41, 41, 41)
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(valorK, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(64, 64, 64)
+                .addComponent(jButton3)
+                .addContainerGap(211, Short.MAX_VALUE))
+        );
+
+        jTabbedPane3.addTab("K ( # Padres )", jPanel5);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addComponent(jTabbedPane3, javax.swing.GroupLayout.Alignment.TRAILING)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addComponent(jTabbedPane3)
+                .addContainerGap())
         );
+
+        jTabbedPane3.getAccessibleContext().setAccessibleName("");
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void vaADistMargActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_vaADistMargActionPerformed
+        valoresDistMarg.removeAllItems();
+        String var = (String) vaADistMarg.getSelectedItem();
+        List<String> valores = mc.getValoresVA(var);
+        for (String valor : valores) {
+            valoresDistMarg.addItem(valor);
+        }
+
+    }//GEN-LAST:event_vaADistMargActionPerformed
+
+   
+    private void varAProbCond(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_varAProbCond
+        // TODO add your handling code here:
+        valorVAa.removeAllItems();
+        String var = (String) vaA.getSelectedItem();
+        List<String> valores = mc.getValoresVA(var);
+        for (String valor : valores) {
+            valorVAa.addItem(valor);
+        }
+    }//GEN-LAST:event_varAProbCond
+
+    private void vaBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_vaBActionPerformed
+
+        valorVAb.removeAllItems();
+        String var = (String) vaB.getSelectedItem();
+        List<String> valores = mc.getValoresVA(var);
+        for (String valor : valores) {
+            valorVAb.addItem(valor);
+        }
+    }//GEN-LAST:event_vaBActionPerformed
+
+    private void probMarginal(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_probMarginal
+        // TODO add your handling code here:
+        double res = mc.calcularProbabilidadMarginal( (String)vaADistMarg.getSelectedItem(), (String)valoresDistMarg.getSelectedItem());
+        DecimalFormat df = new DecimalFormat("#.####");
+        resultadoProbMarg.setText(df.format(res));
+        
+    }//GEN-LAST:event_probMarginal
+
+    private void vaRelacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_vaRelacionActionPerformed
+        valoresRelacion.removeAllItems();
+        String var = (String) vaRelacion.getSelectedItem();
+        List<String> valores = mc.getValoresVA(var);
+        for (String valor : valores) {
+            valoresRelacion.addItem(valor);
+        }
+    }//GEN-LAST:event_vaRelacionActionPerformed
+
+    private void valoresDistMargActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_valoresDistMargActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_valoresDistMargActionPerformed
+
+    private void resultadoProbMargActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_resultadoProbMargActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_resultadoProbMargActionPerformed
+
+    private void valorKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_valorKActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_valorKActionPerformed
+
+    private void probCondicionalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_probCondicionalActionPerformed
+        // TODO add your handling code here:
+        String varA =  vaA.getSelectedItem().toString();
+        String varB = vaB.getSelectedItem().toString();
+        String valorA = valorVAa.getSelectedItem().toString();
+        String valorB = valorVAb.getSelectedItem().toString();
+        
+        double res = mc.calcularProbabilidadCondicional(varA, valorA, varB, valorB);
+        DecimalFormat df = new DecimalFormat("#.####");
+        resultadoProbCond.setText(df.format(res));
+    }//GEN-LAST:event_probCondicionalActionPerformed
 
     /**
      * @param args the command line arguments
@@ -73,11 +479,48 @@ public class Interfaz extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Interfaz().setVisible(true);
+                try {
+                    new Interfaz().setVisible(true);
+                } catch (FileNotFoundException ex) {
+                    Logger.getLogger(Interfaz.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private java.awt.Button button1;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton3;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel4;
+    private javax.swing.JPanel jPanel5;
+    private javax.swing.JTabbedPane jTabbedPane3;
+    private javax.swing.JTextField jTextField4;
+    private javax.swing.JButton probCondicional;
+    private javax.swing.JTextField resultadoProbCond;
+    private javax.swing.JTextField resultadoProbMarg;
+    private javax.swing.JComboBox vaA;
+    private javax.swing.JComboBox vaADistMarg;
+    private javax.swing.JComboBox vaB;
+    private javax.swing.JComboBox vaRelacion;
+    private javax.swing.JTextField valorK;
+    private javax.swing.JComboBox valorVAa;
+    private javax.swing.JComboBox valorVAb;
+    private javax.swing.JComboBox valoresDistMarg;
+    private javax.swing.JComboBox valoresRelacion;
     // End of variables declaration//GEN-END:variables
 }
