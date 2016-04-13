@@ -45,7 +45,9 @@ public void leerDatos(){
     matriz = new String[20][5];
    
     try {
-        Scanner punteroArchivo = new Scanner( new FileReader( "F:\\UNIVERSIDAD\\2015-1\\IA\\weather.nominal.txt" ) );
+        //Scanner punteroArchivo = new Scanner( new FileReader( "F:\\UNIVERSIDAD\\2015-1\\IA\\weather.nominal.txt" ) );
+         
+        Scanner punteroArchivo = new Scanner( new FileReader( "/Users/vjrojasb/2015-1/IA/TF/audiology.arff" ) );
        // Scanner punteroArchivo = new Scanner( new FileReader( "/Users/vjrojasb/2015-1/IA/weather.nominal.txt" ) );
         String linea=""; 
 

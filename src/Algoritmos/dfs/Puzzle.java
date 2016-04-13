@@ -6,8 +6,11 @@
 
 package Algoritmos.dfs;
 
+import com.sun.javafx.scene.control.skin.VirtualFlow;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Stack;
 
 /**
  *
@@ -15,90 +18,51 @@ import java.util.List;
  */
 public class Puzzle {
 
-   ArrayList<String> lista = new ArrayList<String>();
-   ArrayList<Integer> movDirec = new ArrayList<>();
+    ArrayList<String> lista = new ArrayList<String>();
    private String estado_inicial;// = "201475863";
    private String estado_final = "123456780";
    private String estado_actual;
    private String estado_anterior;
    private String estado_siguiente;
    private Boolean visitado;
-   String mov;
-   private Integer direc_mov_ant;
-   private Integer direc_mov_act;
+   private static List<String> nodosVisitados = new ArrayList<String>();
+   private static List<String> nodosHijos =  new ArrayList<String>();
    
-   public String retonar_estados(String puzzle){
-      
-       int indice = puzzle.indexOf("0");
-       
-       if( indice != 0 && indice != 3 && indice != 6  && direc_mov_act != 2 ){// IZQ
-            direc_mov_act = 1 ;
-            return mov = puzzle.substring(0, indice - 1) + "0" + puzzle.charAt(indice-1) + puzzle.substring(indice+1);
-       }else if( indice < 6 && direc_mov_act != 3) { //ABAJO
-             direc_mov_act = 4 ;   
-            return mov = puzzle.substring(0, indice)+ puzzle.charAt(indice+3)+ puzzle.substring(indice+1, indice+3)+ puzzle.charAt(indice) + puzzle.substring(indice+4);
-                      
-       }else if( indice != 2 && indice != 5 && indice != 8 && direc_mov_act != 1 ){ // DER
-           direc_mov_act = 2 ; 
-           return  mov = puzzle.substring(0, indice) + puzzle.charAt(indice + 1) + "0"+ puzzle.substring(indice + 2);
-          
-       }
-       else if( indice > 2 && direc_mov_act != 4){//ARRIB  
-            direc_mov_act = 3 ;
-            return  mov = puzzle.substring(0, indice - 3) + "0" + puzzle.substring( indice - 2 , indice)+ puzzle.charAt(indice -3)+ puzzle.substring(indice+1);
-        
-               
-       }
-        return null;
-   }
+  
    
-   
-//   public void moverFicha(Puzzle p){
-//       
-//     if ( p.direc_mov == 1 ){
-//         
-//     }
-//       
-//              
-//   }
-//   
-   
-   public String movIzq(String puzzle){
-       int indice = puzzle.indexOf("0");
-       if( indice != 0 && indice != 3 && indice != 6  && direc_mov_act != 2){
-                         direc_mov_act = 1 ;
-                        return mov = puzzle.substring(0, indice - 1) + "0" + puzzle.charAt(indice-1) + puzzle.substring(indice+1);
-       }
-       return null;
+   public static  List<String> expandirNodos(String puzzle){
+        //012345678 
+        //201475863
+        String mov;
+        int indice = puzzle.indexOf("0");
+        if( indice != 0 && indice != 3 && indice != 6  ){
+            mov = puzzle.substring(0, indice - 1) + "0" + puzzle.charAt(indice-1) + puzzle.substring(indice+1);
+            nodosHijos.add(mov);
         }
-    
-        public String movArr(String puzzle){
-           int indice = puzzle.indexOf("0");
-           if( indice > 2 && direc_mov_act != 4){ 
-                            direc_mov_act = 3  ;  
-                          return  mov = puzzle.substring(0, indice) + puzzle.charAt(indice + 1) + "0"+ puzzle.substring(indice + 2);
-                       }
-           return null;
+        if( indice != 2 && indice != 5 && indice != 8){
+            mov = puzzle.substring(0, indice) + puzzle.charAt(indice + 1) + "0"+ puzzle.substring(indice + 2);
+            nodosHijos.add(mov);
+        }
+        if( indice > 2 ){           
+            mov = puzzle.substring(0, indice-3) + puzzle.charAt(indice) + puzzle.substring(indice-2, indice)+ puzzle.charAt(indice-3)+ puzzle.substring(indice +1);
+            nodosHijos.add(mov);    
+        }        
+        if( indice < 6) {
+            mov = puzzle.substring(0, indice )+ puzzle.charAt(indice+3)+ puzzle.substring(indice+1, indice+3)+ puzzle.charAt(indice) + puzzle.substring(indice+4);
+            nodosHijos.add(mov);
+        }     
+        return nodosHijos;
+   }
+        
+   public static boolean discovered(String w){
+       for (int i = 0; i <  nodosVisitados.size() ; i++) {
+           if (w.equals(nodosVisitados.get(i))) {
+               return true;
+           }
        }
+       return false;
+   } 
    
-       public String movDer(String puzzle){
-           int indice = puzzle.indexOf("0");
-           if( indice != 2 && indice != 5 && indice != 8 && direc_mov_act != 1){
-                            direc_mov_act = 2 ;
-                          return  mov = puzzle.substring(0, indice) + puzzle.charAt(indice + 1) + "0"+ puzzle.substring(indice + 2);
-                       }
-           return null;
-       }
-       
-       public String movAb(String puzzle){
-           int indice = puzzle.indexOf("0");
-           if( indice < 6 && direc_mov_act != 3) {
-                            direc_mov_act = 4 ;
-                       return mov = puzzle.substring(0, indice)+ puzzle.charAt(indice+3)+ puzzle.substring(indice+1, indice+3)+ puzzle.charAt(indice);
-                      }
-           return null;
-       }
-       
     public Boolean esta_en_lista(String estado){
         Boolean visitado = false;
         for (String l : lista) {
@@ -109,23 +73,38 @@ public class Puzzle {
         return visitado;
     }
       
-    public void dfs(Puzzle p){
-        
-         p.estado_actual = retonar_estados(p.estado_anterior);
-        if (esta_en_lista(p.estado_actual)) {
-            
-            do{
-                p.estado_actual = retonar_estados(p.estado_anterior);
-            }while(esta_en_lista(p.estado_actual));
-            
-            lista.add(p.estado_actual);
-        }else{
-              lista.add(p.estado_actual);
+    public void dfs(String v ){
+        v = nodosHijos.get(0);
+        nodosVisitados.add(v);
+        for (int i = 0; i < nodosHijos.size(); i++) {
+            if( !discovered(nodosHijos.get(i)) ){
+                dfs(nodosHijos.get(i));
+            }
         }
-        
-        
-        
     }
+    
+    public static void dfs_Iterative(String v){
+        Stack stack = new Stack();
+        stack.push(v);
+        int x = 0;
+        while ( !stack.isEmpty()) {            
+             v = (String) stack.pop();
+            if( !discovered(v)){
+                nodosVisitados.add(v);
+                List<String> n_expandidos = expandirNodos(v);
+                for (int i = 0; i < n_expandidos.size() ; i++) {
+                    stack.push( n_expandidos.get(i) );
+                }
+                 x++;
+            }
+            x++;
+            if(x == 20){
+                return;
+            }
+        }
+    }
+    
+    
     
     public void imprimir(String v){
         System.out.println(v);
@@ -134,30 +113,13 @@ public class Puzzle {
             
     public static void main(String[] args) {
        
-        Puzzle gPuzzle =  new Puzzle();
-        gPuzzle.estado_anterior = "810723654";
-        
-        gPuzzle.direc_mov_act = 10;
-        
-        
-//        for (int i = 0; i < 12; i++) {
-//             gPuzzle.dfs(gPuzzle);
-//             gPuzzle.estado_anterior = gPuzzle.estado_actual;
-//             System.out.println( gPuzzle.lista.get(i));
-//        }
-//        
-        int i=0;
-        while (gPuzzle.estado_actual !=  gPuzzle.estado_final) {            
-             gPuzzle.dfs(gPuzzle);
-             gPuzzle.estado_anterior = gPuzzle.estado_actual;
-             System.out.println( gPuzzle.lista.get(i));
-             i++;
+       
+        dfs_Iterative("801723654");
+         for (int i = 0; i < nodosVisitados.size() ; i++) {
+             System.out.println( nodosVisitados.get(i));
         }
-        
-//        for (int i = 0; i < gPuzzle.lista.size() ; i++) {
-//           // gPuzzle.imprimir( lista.get(i) );
-//             System.out.println( gPuzzle.lista.get(i));
-//        }
+       
+            
     }
 
     
